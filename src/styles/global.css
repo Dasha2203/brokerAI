@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --layoutHeaderHeight: 56px;
+  --layoutPagePaddingTop: var(--layoutHeaderHeight);
+  --focusColor: #e7e9ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Cairo", sans-serif;
+}
+
+input {
+  -webkit-appearance: none;
+}
+
+.track::-webkit-scrollbar {
+  width: 8px;
+}
+
+.track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.track::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  border: 3px solid white;
+  /* @apply bg-gray-1700; */
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --layoutHeaderHeight: 64px;
+    --layoutPagePaddingTop: var(--layoutHeaderHeight);
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer base {
+  body {
+    /* @apply text-gray-1900; */
+  }
+}
+
+@layer components {
+  .min-h-full-screen {
+    @apply min-h-[100svh];
+  }
+}
+
+@layer components {
+  .h7 {
+    @apply text-[11px] font-semibold;
+    @apply lg:text-xs;
+  }
+
+  .text-xs-responsive {
+    @apply text-xs lg:text-sm;
+  }
+
+  .text-sm-responsive {
+    @apply text-sm lg:text-base;
+  }
+
+  .h6 {
+    @apply text-sm-responsive font-bold;
+  }
+
+  .text-base-responsive {
+    @apply text-base lg:text-lg;
+  }
+
+  .h5 {
+    @apply text-base-responsive font-bold;
+  }
+
+  .text-lg-responsive {
+    @apply text-lg lg:text-xl;
+  }
+
+  .text-xl-responsive {
+    @apply text-xl leading-[30px];
+    @apply xs:text-[21px] xs:leading-[30px];
+    @apply lg:text-[24px] lg:leading-[34px];
+  }
+
+  .h4 {
+    @apply text-xl-responsive font-bold;
+  }
+
+  .text-2xl-responsive {
+    @apply text-[26px] leading-[36px];
+    @apply xs:text-[28px] xs:leading-[38px];
+    @apply lg:text-[32px] lg:leading-[42px];
+  }
+
+  .text-3xl-responsive {
+    @apply text-[31px] font-bold leading-[41px];
+    @apply xs:text-[38px] xs:leading-[48px];
+    @apply lg:text-[42px] lg:leading-[54px];
+  }
+
+  .h2 {
+    @apply text-3xl-responsive font-extrabold;
+  }
+
+  .text-4xl-responsive {
+    @apply text-[39px] font-bold leading-[48px];
+    @apply xs:text-[51px] xs:leading-[64px];
+    @apply lg:text-[56px] lg:leading-[72px];
+  }
+
+  .h1 {
+    @apply text-4xl-responsive font-extrabold;
+  }
+
+  .text-super {
+    @apply text-[49px] font-extrabold leading-[61px];
+    @apply xs:text-[67px] xs:leading-[84px];
+    @apply lg:text-[74px] lg:leading-[92px];
+  }
+}
+
+@layer components {
+  .tooltip-underline {
+    @apply cursor-pointer border-b border-dashed border-gray-800;
+  }
+}
+
+@layer components {
+  .layout-grid {
+    @apply grid w-full grid-cols-6 gap-x-4;
+    @apply md:grid-cols-12 lg:gap-x-6 2xl:gap-x-8;
+  }
+}
+
+/*https://github.com/tailwindlabs/tailwindcss-forms/issues/52#issuecomment-884735470*/
+@layer base {
+  [type='checkbox'],
+  [type='radio'] {
+    border-color: var(--focusColor);
+  }
+
+  [type='checkbox'].form-checkbox:focus {
+    --tw-ring-color: var(--focusColor);
+    --tw-ring-offset-width: 1px;
+  }
+}
+
+@layer components {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
