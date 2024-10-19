@@ -27,7 +27,7 @@ const formFields: {
 ];
 
 const LoginForm = () => {
-  const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting, setErrors } =
+  const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
     useForm<FormValues>({
       initialValues: {
         firstName: '',

@@ -7,6 +7,7 @@ import FormField from '../FormField';
 import PasswordInput from '../PasswordInput';
 import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
+import { register } from '@/api/auth';
 
 const formFields: {
   label: string;
@@ -69,8 +70,23 @@ const RegisterForm = () => {
         if (!email || !password || !repeatPassword || !firstName || !lastName) {
           return;
         }
+        if (password !== repeatPassword) {
+          setErrors({ repeatPassword: 'Пароли должны совпадать' });
+          return;
+        }
+
+        await register({
+          firstName,
+          languageCode: 'en',
+          lastName,
+          password,
+          email,
+          countryCode: 'US',
+        });
       },
     });
+
+  console.log(getFieldProps('firstName'));
 
   return (
     <form
@@ -99,7 +115,7 @@ const RegisterForm = () => {
         className="w-full"
         type="submit"
       >
-        Sign up
+        {isSubmitting ? 'Loading...' : 'Sign up'}
       </Button>
       <div className="mt-6">
         <span> Already have an account?</span>

@@ -1,7 +1,9 @@
 import { GetServerSideProps } from 'next';
 
-const getServerSideProps: GetServerSideProps = async (context) => {
-  return ({props: {}});
+const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default getServerSideProps;

@@ -3,7 +3,20 @@ import { InputProps } from './types';
 import clsx from 'clsx';
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ leftIcon, rightIcon, error, className, style, ...props }, ref) => {
+  (
+    {
+      isInvalid = false,
+      value,
+      error,
+      onChange,
+      style,
+      className,
+      rightIcon,
+      leftIcon,
+      ...rest
+    },
+    ref,
+  ) => {
     return (
       <div className={clsx(className, 'font-Open-Sans')} style={style}>
         <div className="relative">
@@ -20,6 +33,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
           <input
+            {...rest}
             ref={ref}
             className={clsx(
               // dark
@@ -34,7 +48,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 'border-red hover:border-red focus:border-red': !!error,
               },
             )}
-            {...props}
+            value={value === null ? '' : value}
+            onChange={(event) => {
+              onChange(event.target.value ? event.target.value : null);
+            }}
           />
 
           {rightIcon && (
