@@ -7,7 +7,6 @@ import FormField from '../FormField';
 import PasswordInput from '../PasswordInput';
 import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
-import { register } from '@/api/auth';
 
 const formFields: {
   label: string;
@@ -15,16 +14,6 @@ const formFields: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: React.ComponentType<any>;
 }[] = [
-  {
-    label: 'First name',
-    field: 'firstName',
-    component: Input,
-  },
-  {
-    label: 'Last name',
-    field: 'lastName',
-    component: Input,
-  },
   {
     label: 'Email',
     field: 'email',
@@ -35,15 +24,10 @@ const formFields: {
     field: 'password',
     component: PasswordInput,
   },
-  {
-    label: 'Repeat password',
-    field: 'repeatPassword',
-    component: PasswordInput,
-  },
 ];
 
-const RegisterForm = () => {
-  const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting, setErrors } =
+const LoginForm = () => {
+  const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
     useForm<FormValues>({
       initialValues: {
         firstName: '',
@@ -70,23 +54,8 @@ const RegisterForm = () => {
         if (!email || !password || !repeatPassword || !firstName || !lastName) {
           return;
         }
-        if (password !== repeatPassword) {
-          setErrors({ repeatPassword: 'Пароли должны совпадать' });
-          return;
-        }
-
-        await register({
-          firstName,
-          languageCode: 'en',
-          lastName,
-          password,
-          email,
-          countryCode: 'US',
-        });
       },
     });
-
-  console.log(getFieldProps('firstName'));
 
   return (
     <form
@@ -115,7 +84,7 @@ const RegisterForm = () => {
         className="w-full"
         type="submit"
       >
-        {isSubmitting ? 'Loading...' : 'Sign up'}
+        Sign up
       </Button>
       <div className="mt-6">
         <span> Already have an account?</span>
@@ -124,4 +93,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

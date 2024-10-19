@@ -20,6 +20,12 @@ input {
   -webkit-appearance: none;
 }
 
+input[type="password"] {
+  /* -webkit-text-security: disc !important; */
+  /* padding-block: 1px;
+  padding-inline: 2px; */
+}
+
 .track::-webkit-scrollbar {
   width: 8px;
 }
@@ -57,6 +63,16 @@ input {
 @layer components {
   .min-h-full-screen {
     @apply min-h-[100svh];
+  }
+}
+
+@layer components {
+  .font-Cairo {
+    font-family: "Cairo", sans-serif;
+  }
+
+  .font-Open-Sans {
+    font-family: "Open Sans", sans-serif;
   }
 }
 
