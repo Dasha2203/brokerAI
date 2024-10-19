@@ -73,43 +73,38 @@ const RegisterForm = () => {
     });
 
   return (
-    <div className="mx-auto p-6 md:p-12 md:max-w-[512px] w-full bg-white dark:bg-violet-500 rounded-xl">
-      <h1 className="mb-10 font-bold text-3xl md:text-4xl text-center ">
-        Sign up
-      </h1>
-      <form
-        className="flex flex-col gap-7"
-        onSubmit={(e) => {
-          if (isSubmitting) {
-            return;
-          }
-          handleSubmit(e);
-        }}
+    <form
+      className="flex flex-col gap-7"
+      onSubmit={(e) => {
+        if (isSubmitting) {
+          return;
+        }
+        handleSubmit(e);
+      }}
+    >
+      {formFields.map(({ field, component: Field, label }, idx) => (
+        <FormField label={label} key={idx} {...getFieldMeta(field)}>
+          <Field
+            className={'w-full'}
+            placeholder={label}
+            {...getFieldProps(field)}
+          />
+        </FormField>
+      ))}
+      <Button
+        as="button"
+        uiColor="primary"
+        variant="contained"
+        fixedSize
+        className="w-full"
+        type="submit"
       >
-        {formFields.map(({ field, component: Field, label }, idx) => (
-          <FormField label={label} key={idx} {...getFieldMeta(field)}>
-            <Field
-              className={'w-full'}
-              placeholder={label}
-              {...getFieldProps(field)}
-            />
-          </FormField>
-        ))}
-        <Button
-          as="button"
-          uiColor="primary"
-          variant="contained"
-          fixedSize
-          className="w-full"
-          type="submit"
-        >
-          Sign up
-        </Button>
-        <div className="mt-6">
-          <span> Already have an account?</span>
-        </div>
-      </form>
-    </div>
+        Sign up
+      </Button>
+      <div className="mt-6">
+        <span> Already have an account?</span>
+      </div>
+    </form>
   );
 };
 
