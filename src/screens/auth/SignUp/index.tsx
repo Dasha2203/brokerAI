@@ -1,3 +1,4 @@
+/* eslint-disable */
 import RegisterForm from '@/components/forms/RegisterForm';
 import LayoutContainer from '@/components/ui/LayoutContainer';
 

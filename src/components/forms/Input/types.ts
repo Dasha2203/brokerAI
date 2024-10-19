@@ -1,4 +1,5 @@
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  label?: string;
   error?: string;
+  rightIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
 };

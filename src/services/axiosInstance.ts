@@ -11,7 +11,7 @@ const axiosClient = (token: string | null = null) => {
   //     };
 
   const client = axios.create({
-    baseURL: 'https://dog.ceo/api',
+    baseURL: 'http://195.133.197.163:5000/api/',
   });
 
   return client;

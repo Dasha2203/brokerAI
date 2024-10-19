@@ -40,7 +40,7 @@ export default tseslint.config(
       ...eslintConfigPrettier.rules,
       'prefer-const': 'error',
       'quotes': ['error', 'single'], // Правило ESLint для кавычек
-      'prettier/prettier': ['error', { 'singleQuote': true }]
+    'prettier/prettier': ['error', { 'singleQuote': true }]
     }
   },
 );
