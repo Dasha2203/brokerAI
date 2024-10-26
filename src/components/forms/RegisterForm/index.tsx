@@ -8,6 +8,7 @@ import PasswordInput from '../PasswordInput';
 import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
 import { register } from '@/api/auth';
+import Link from 'next/link';
 
 const formFields: {
   label: string;
@@ -118,7 +119,7 @@ const RegisterForm = () => {
         {isSubmitting ? 'Loading...' : 'Sign up'}
       </Button>
       <div className="mt-6">
-        <span> Already have an account?</span>
+        <Link href="/auth/login"> Already have an account?</Link>
       </div>
     </form>
   );
