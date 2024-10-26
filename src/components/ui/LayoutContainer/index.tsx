@@ -8,15 +8,15 @@ const LayoutContainer = forwardRef<HTMLDivElement, Props>(
       style={style}
       className={clsx(
         className,
-        'mx-auto w-full px-4 lg:px-8 max-w-[1376px]',
+        'mx-auto w-full px-4 lg:px-8 max-w-[1376px] pt-36',
       )}
       ref={forwardRef}
     >
       {children}
     </div>
   ),
-)
+);
 
-LayoutContainer.displayName = 'LayoutContainer'
+LayoutContainer.displayName = 'LayoutContainer';
 
-export default LayoutContainer
+export default LayoutContainer;
