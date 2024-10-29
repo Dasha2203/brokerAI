@@ -70,26 +70,12 @@ module.exports = {
       xl: ['0 12px 20px rgb(0 0 0 / 0.1)', '0 6px 5px rgb(0 0 0 / 0.08)'],
       '2xl': ['0 16px 24px rgb(0 0 0 / 0.1)', '0 6px 5px rgb(0 0 0 / 0.08)'],
     },
-    keyframes: {
-      fadeInUp: {
-        '0%': {
-          transform: 'translateY(20px)',
-          opacity: 0
-        },
-        '100%': {
-          transform: 'translateY(0)',
-          opacity: 1
-        }
-      }
-    },
-    animation: {
-      'fadeInUp': 'fadeInUp 250ms ease-in'
-    },
   },
   variants: {
     extend: {},
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
+    require("tailwindcss-animate")
   ],
 }

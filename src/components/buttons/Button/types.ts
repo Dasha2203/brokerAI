@@ -9,6 +9,7 @@ export type Props = {
   variant?: ButtonVariant;
   fixedSize?: boolean;
   size?: 'sm' | 'md' | 'lg';
+  isLoading?: boolean;
 };
 
 export interface ButtonProps

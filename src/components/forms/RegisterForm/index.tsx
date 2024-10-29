@@ -9,6 +9,7 @@ import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
 import { register } from '@/api/auth';
 import Link from 'next/link';
+import clsx from 'clsx';
 
 const formFields: {
   label: string;
@@ -113,7 +114,8 @@ const RegisterForm = () => {
         uiColor="primary"
         variant="contained"
         fixedSize
-        className="w-full"
+        isLoading={true}
+        className={clsx('w-full', isSubmitting ? 'animate-spin' : null)}
         type="submit"
       >
         {isSubmitting ? 'Loading...' : 'Sign up'}
