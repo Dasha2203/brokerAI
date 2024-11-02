@@ -1,4 +1,5 @@
 import {
+  ChangePasswordCredentials,
   ErrorCodeResponse,
   RegistrationCredentials,
   RegistrationResponse,
@@ -25,6 +26,19 @@ export const resetPassword = async (data: ResetPasswordCredentials) => {
   try {
     const response = await axios.post<ErrorCodeResponse>(
       '/user/password/request-reset',
+      data,
+    );
+
+    return response.data;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
+export const changePassword = async (data: ChangePasswordCredentials) => {
+  try {
+    const response = await axios.post<ErrorCodeResponse>(
+      '/user/password/reset',
       data,
     );
 

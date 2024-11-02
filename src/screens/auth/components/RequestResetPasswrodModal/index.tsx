@@ -1,10 +1,10 @@
 import DefaultError from '@/components/errors/DefaultError';
-import ResetPasswordForm from '@/components/forms/ResetPasswordForm';
+import RequestResetPasswordForm from '@/components/forms/RequestResetPasswordForm';
 import Modal from '@/components/Modal';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Props } from './types';
 
-const ResetPasswordModal = ({ email, ...props }: Props) => {
+const RequestResetPasswordModal = ({ email, ...props }: Props) => {
   function handleClose() {
     props.context.onOpenChange(false);
   }
@@ -16,10 +16,10 @@ const ResetPasswordModal = ({ email, ...props }: Props) => {
           <DefaultError {...props} className="my-auto" />
         )}
       >
-        <ResetPasswordForm email={email} onCancel={handleClose} />
+        <RequestResetPasswordForm email={email} onCancel={handleClose} />
       </ErrorBoundary>
     </Modal>
   );
 };
 
-export default ResetPasswordModal;
+export default RequestResetPasswordModal;

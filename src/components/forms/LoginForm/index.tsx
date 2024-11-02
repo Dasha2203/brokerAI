@@ -8,7 +8,7 @@ import PasswordInput from '../PasswordInput';
 import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
 import useModal from '@/hooks/useModal';
-import ResetPasswordModal from '@/screens/auth/components/ResetPasswrodModal';
+import RequestResetPasswrodModal from '@/screens/auth/components/RequestResetPasswrodModal';
 
 const LoginForm = () => {
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
@@ -110,7 +110,7 @@ const LoginForm = () => {
       </div>
 
       {restoreModal.isOpen && (
-        <ResetPasswordModal {...restoreModal.modalProps} />
+        <RequestResetPasswrodModal {...restoreModal.modalProps} />
       )}
     </form>
   );

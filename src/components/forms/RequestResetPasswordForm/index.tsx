@@ -7,10 +7,10 @@ import Input from '../Input';
 import Button from '@/components/buttons/Button';
 import { useErrorBoundary } from 'react-error-boundary';
 import Lottie from 'lottie-react';
-import emailSuccess from "@/animations/email-success.json";
+import emailSuccess from '@/animations/email-success.json';
 import { resetPassword } from '@/api/auth';
 
-const ResetPasswordForm = ({ email, onCancel }: Props) => {
+const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
   const [isSuccess, setIsSuccess] = useState(false);
   const { showBoundary } = useErrorBoundary();
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
@@ -99,4 +99,4 @@ const ResetPasswordForm = ({ email, onCancel }: Props) => {
   );
 };
 
-export default ResetPasswordForm;
+export default RequestResetPasswordForm;

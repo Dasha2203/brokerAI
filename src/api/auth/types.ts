@@ -23,3 +23,8 @@ export type RegistrationResponse = ErrorCodeResponse & {
 export type ResetPasswordCredentials = {
   email: string;
 };
+
+export type ChangePasswordCredentials = {
+  password: string;
+  code: string;
+};
