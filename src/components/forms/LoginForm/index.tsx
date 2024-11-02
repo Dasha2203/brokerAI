@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useMemo } from 'react';
 import Button from '@/components/buttons/Button';
 import Input from '@/components/forms/Input';
 import * as Yup from 'yup';
@@ -7,24 +7,8 @@ import FormField from '../FormField';
 import PasswordInput from '../PasswordInput';
 import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
-
-const formFields: {
-  label: string;
-  field: keyof FormValues;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  component: React.ComponentType<any>;
-}[] = [
-  {
-    label: 'Email',
-    field: 'email',
-    component: Input,
-  },
-  {
-    label: 'Password',
-    field: 'password',
-    component: PasswordInput,
-  },
-];
+import useModal from '@/hooks/useModal';
+import RequestResetPasswrodModal from '@/screens/auth/components/RequestResetPasswrodModal';
 
 const LoginForm = () => {
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
@@ -56,6 +40,36 @@ const LoginForm = () => {
         }
       },
     });
+  const restoreModal = useModal();
+
+  const formFields: {
+    label: string;
+    field: keyof FormValues;
+    rightNode?: React.ReactNode;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    component: React.ComponentType<any>;
+  }[] = useMemo(
+    () => [
+      {
+        label: 'Email',
+        field: 'email',
+        component: Input,
+      },
+      {
+        label: 'Password',
+        field: 'password',
+        rightNode: (
+          <div>
+            <button type="button" onClick={() => restoreModal.setIsOpen(true)}>
+              Forgot password?
+            </button>
+          </div>
+        ),
+        component: PasswordInput,
+      },
+    ],
+    [restoreModal],
+  );
 
   return (
     <form
@@ -67,8 +81,13 @@ const LoginForm = () => {
         handleSubmit(e);
       }}
     >
-      {formFields.map(({ field, component: Field, label }, idx) => (
-        <FormField label={label} key={idx} {...getFieldMeta(field)}>
+      {formFields.map(({ field, component: Field, label, rightNode }, idx) => (
+        <FormField
+          label={label}
+          rightNode={rightNode}
+          key={idx}
+          {...getFieldMeta(field)}
+        >
           <Field
             className={'w-full'}
             placeholder={label}
@@ -87,8 +106,12 @@ const LoginForm = () => {
         Sign up
       </Button>
       <div className="mt-6">
-        <span> Already have an account?</span>
+        <span>You don't have an account ?</span>
       </div>
+
+      {restoreModal.isOpen && (
+        <RequestResetPasswrodModal {...restoreModal.modalProps} />
+      )}
     </form>
   );
 };

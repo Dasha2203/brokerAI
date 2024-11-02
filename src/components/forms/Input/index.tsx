@@ -37,14 +37,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             className={clsx(
               // dark
-              'dark:bg-transparent dark:border-violet-300',
+              'dark:bg-transparent ',
               // light
-              'bg-[#F5F5F5] border-transparent',
+              'bg-[#F5F5F5]',
               'py-1.5 px-3 md:py-3 md:px-6',
-              'rounded-xl focus:border-violet-700 hover:border-violet-600 outline-none border-2 transition-colors',
+              'rounded-xl  outline-none border-2 transition-colors',
               'text-lg md:text-xl',
               className,
               {
+                'border-transparent dark:border-violet-300 focus:border-violet-700 hover:border-violet-600': !error,
                 'border-red hover:border-red focus:border-red': !!error,
               },
             )}
@@ -67,12 +68,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
         </div>
-
-        {error && (
-          <span className="mt-3 text-sm block text-red font-semibold">
-            {error}
-          </span>
-        )}
       </div>
     );
   },

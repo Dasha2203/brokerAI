@@ -9,14 +9,17 @@
     "lint": "ESLINT_USE_FLAT_CONFIG=true npx eslint . --report-unused-disable-directives --max-warnings 0 && stylelint '**/*.css' --max-warnings 0"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.26.25",
     "@next/font": "^14.2.5",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@types/node": "20.14.10",
+    "@types/react-lottie": "^1.2.10",
     "autoprefixer": "10.4.19",
     "axios": "^1.7.7",
     "clsx": "^2.1.1",
     "formik": "^2.4.6",
     "i18next": "^23.16.2",
+    "lottie-react": "^2.4.0",
     "next": "14.2.4",
     "next-i18next": "^15.3.1",
     "next-intl": "^3.23.2",
@@ -24,6 +27,7 @@
     "postcss": "8.4.39",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-error-boundary": "^4.1.2",
     "react-i18next": "^15.1.0",
     "tailwindcss": "3.4.4",
     "typescript": "5.5.3",
@@ -43,6 +47,7 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.11.0",
     "prettier": "^3.3.3",
+    "tailwindcss-animate": "^1.0.7",
     "typescript-eslint": "^8.10.0"
   },
   "proxy": "http://195.133.197.163:5000"

@@ -87,11 +87,9 @@ const RegisterForm = () => {
       },
     });
 
-  console.log(getFieldProps('firstName'));
-
   return (
     <form
-      className="flex flex-col gap-7"
+      className="flex flex-col gap-7 overflow-hidden"
       onSubmit={(e) => {
         if (isSubmitting) {
           return;
@@ -108,11 +106,13 @@ const RegisterForm = () => {
           />
         </FormField>
       ))}
+
       <Button
         as="button"
         uiColor="primary"
         variant="contained"
         fixedSize
+        isLoading={isSubmitting}
         className="w-full"
         type="submit"
       >

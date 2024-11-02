@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header
       className={clsx(
-        'py-7 fixed top-0 right-0 left-0 z-10',
+        'py-3 md:py-7 fixed top-0 right-0 left-0 z-10',
         'bg-white',
         'dark:bg-violet-800',
       )}

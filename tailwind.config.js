@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Cairo', ...defaultTheme.fontFamily.sans],
       },
+      padding: {
+        30: '7.5rem',
+      },
       spacing: {
         4.5: '1.125rem',
         5.5: '1.375rem',
@@ -31,6 +34,9 @@ module.exports = {
         xl: '1280px',
         '2xl': '1536px',
       },
+      fontSize: {
+        '3.5xl': ['2.125rem', '64px']
+      },
       colors: {
         violet: {
           900: '#0D0B21', // dark1
@@ -46,7 +52,7 @@ module.exports = {
           200: '#C2C2C2',
           300: '#A5A5A5'
         },
-        black: '202020',
+        black: '#202020',
         yellow: '#FFAB2D',
         ['yellow-soft']: '#FFEBCC',
         red: '#FF4A55',
@@ -70,26 +76,12 @@ module.exports = {
       xl: ['0 12px 20px rgb(0 0 0 / 0.1)', '0 6px 5px rgb(0 0 0 / 0.08)'],
       '2xl': ['0 16px 24px rgb(0 0 0 / 0.1)', '0 6px 5px rgb(0 0 0 / 0.08)'],
     },
-    keyframes: {
-      fadeInUp: {
-        '0%': {
-          transform: 'translateY(20px)',
-          opacity: 0
-        },
-        '100%': {
-          transform: 'translateY(0)',
-          opacity: 1
-        }
-      }
-    },
-    animation: {
-      'fadeInUp': 'fadeInUp 250ms ease-in'
-    },
   },
   variants: {
     extend: {},
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
+    require("tailwindcss-animate")
   ],
 }

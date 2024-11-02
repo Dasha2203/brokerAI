@@ -8,12 +8,14 @@ import {
   ButtonVariant,
   CustomButtonProps,
 } from './types';
+import LoadingIcon from '@/icons/LoadingIcon';
 
 const Button = ({
   as,
   uiColor,
   variant,
   size = 'md',
+  isLoading = false,
   fixedSize = false,
   ...props
 }: CustomButtonProps) => {
@@ -139,7 +141,11 @@ const Button = ({
       type={type}
       {...rest}
     >
-      {children}
+      {isLoading ? (
+        <LoadingIcon className="w-8 h-8 animate-spin mx-auto" />
+      ) : (
+        children
+      )}
     </button>
   );
 };
