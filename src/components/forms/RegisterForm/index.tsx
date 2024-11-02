@@ -8,7 +8,7 @@ import PasswordInput from '../PasswordInput';
 import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
 import { register } from '@/api/auth';
-import Link from 'next/link';
+import Link from '@/components/Link';
 
 const formFields: {
   label: string;
@@ -118,9 +118,9 @@ const RegisterForm = () => {
       >
         {isSubmitting ? 'Loading...' : 'Sign up'}
       </Button>
-      <div className="mt-6">
-        <Link href="/auth/login"> Already have an account?</Link>
-      </div>
+      <Link as="link" href="/auth/login" className="text-center">
+        You don't have an account ?
+      </Link>
     </form>
   );
 };

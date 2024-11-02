@@ -9,6 +9,7 @@ import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
 import useModal from '@/hooks/useModal';
 import RequestResetPasswrodModal from '@/screens/auth/components/RequestResetPasswrodModal';
+import Link from '@/components/Link';
 
 const LoginForm = () => {
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
@@ -59,11 +60,9 @@ const LoginForm = () => {
         label: 'Password',
         field: 'password',
         rightNode: (
-          <div>
-            <button type="button" onClick={() => restoreModal.setIsOpen(true)}>
-              Forgot password?
-            </button>
-          </div>
+          <Link as="button" onClick={() => restoreModal.setIsOpen(true)}>
+            Forgot password?
+          </Link>
         ),
         component: PasswordInput,
       },
@@ -105,9 +104,9 @@ const LoginForm = () => {
       >
         Sign up
       </Button>
-      <div className="mt-6">
-        <span>You don't have an account ?</span>
-      </div>
+      <Link as="link" href="/auth/register" className="text-center">
+        You don't have an account ?
+      </Link>
 
       {restoreModal.isOpen && (
         <RequestResetPasswrodModal {...restoreModal.modalProps} />

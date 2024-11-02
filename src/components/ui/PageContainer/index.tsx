@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import LayoutContainer from '../LayoutContainer';
 import { Props } from './types';
 import clsx from 'clsx';
@@ -6,7 +6,7 @@ import clsx from 'clsx';
 const PageContainer = ({ className, style, children }: Props) => {
   return (
     <LayoutContainer
-      className={clsx('pt-[76px] md:pt-30 mt-4 md:mt-8', className)}
+      className={clsx('pt-[92px] md:pt-[138px]', className)}
       style={style}
     >
       {children}
