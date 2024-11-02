@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Cairo', ...defaultTheme.fontFamily.sans],
       },
+      padding: {
+        30: '7.5rem',
+      },
       spacing: {
         4.5: '1.125rem',
         5.5: '1.375rem',
