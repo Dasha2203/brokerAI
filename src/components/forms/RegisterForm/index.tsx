@@ -9,7 +9,6 @@ import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
 import { register } from '@/api/auth';
 import Link from 'next/link';
-import clsx from 'clsx';
 
 const formFields: {
   label: string;
@@ -88,11 +87,9 @@ const RegisterForm = () => {
       },
     });
 
-  console.log(getFieldProps('firstName'));
-
   return (
     <form
-      className="flex flex-col gap-7"
+      className="flex flex-col gap-7 overflow-hidden"
       onSubmit={(e) => {
         if (isSubmitting) {
           return;
@@ -109,13 +106,14 @@ const RegisterForm = () => {
           />
         </FormField>
       ))}
+
       <Button
         as="button"
         uiColor="primary"
         variant="contained"
         fixedSize
-        isLoading={true}
-        className={clsx('w-full', isSubmitting ? 'animate-spin' : null)}
+        isLoading={isSubmitting}
+        className="w-full"
         type="submit"
       >
         {isSubmitting ? 'Loading...' : 'Sign up'}

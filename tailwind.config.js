@@ -31,6 +31,9 @@ module.exports = {
         xl: '1280px',
         '2xl': '1536px',
       },
+      fontSize: {
+        '3.5xl': ['2.125rem', '64px']
+      },
       colors: {
         violet: {
           900: '#0D0B21', // dark1
@@ -46,7 +49,7 @@ module.exports = {
           200: '#C2C2C2',
           300: '#A5A5A5'
         },
-        black: '202020',
+        black: '#202020',
         yellow: '#FFAB2D',
         ['yellow-soft']: '#FFEBCC',
         red: '#FF4A55',
