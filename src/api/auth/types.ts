@@ -17,7 +17,21 @@ export type RegistrationResponse = ErrorCodeResponse & {
     refreshToken: string;
     accessTokenExpiration: Date;
     refreshTokenExpiration: Date;
-  };
+  } | null;
+};
+
+export type LoginCredentials = {
+  email: string;
+  password: string;
+};
+
+export type LoginResponse = ErrorCodeResponse & {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+    accessTokenExpiration: Date;
+    refreshTokenExpiration: Date;
+  } | null;
 };
 
 export type ResetPasswordCredentials = {
@@ -25,6 +39,15 @@ export type ResetPasswordCredentials = {
 };
 
 export type ChangePasswordCredentials = {
-  password: string;
+  newPassword: string;
   code: string;
+};
+
+export type RefreshResponse = ErrorCodeResponse & {
+  data: {
+    accessToken: string;
+    refreshToken: string;
+    accessTokenExpiration: Date;
+    refreshTokenExpiration: Date;
+  };
 };

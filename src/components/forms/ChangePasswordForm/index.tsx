@@ -10,8 +10,14 @@ import FormField from '../FormField';
 import Button from '@/components/buttons/Button';
 import { changePassword } from '@/api/auth';
 import SuccessQuery from '@/components/SuccessQuery';
+import { useTranslations } from 'next-intl';
+
+const minCountPass = 6;
 
 const ChangePasswordForm = () => {
+  const tAuth = useTranslations('auth');
+  const tCommonError = useTranslations('error');
+  const tError = useTranslations('auth.error');
   const [isSuccess, setIsSuccess] = useState(false);
   const { showBoundary } = useErrorBoundary();
   const params = useSearchParams();
@@ -29,13 +35,13 @@ const ChangePasswordForm = () => {
     },
     validationSchema: Yup.object({
       password: Yup.string()
-        .min(6, 'Minimal 6 symbols')
+        .min(minCountPass, tError('password.min', { count: minCountPass }))
         .nullable()
-        .required('field is empty'),
+        .required(tError('required')),
       repeatPassword: Yup.string()
-        .min(6, 'Minimal 6 symbols')
+        .min(minCountPass, tError('password.min', { count: minCountPass }))
         .nullable()
-        .required('field is empty'),
+        .required(tError('required')),
     }),
     onSubmit: async (values) => {
       const { password, repeatPassword } = values;
@@ -45,18 +51,18 @@ const ChangePasswordForm = () => {
       }
 
       if (password !== repeatPassword) {
-        setFieldError('repeatPassword', 'Пароли должны совпадать');
+        setFieldError('repeatPassword', tError('password.equals'));
         return;
       }
 
       try {
         await changePassword({
-          password,
+          newPassword: password,
           code,
         });
         setIsSuccess(true);
       } catch (err) {
-        showBoundary('Smth went wrong!');
+        showBoundary({ message: tCommonError('wrong') });
       }
     },
   });
@@ -70,12 +76,12 @@ const ChangePasswordForm = () => {
   }[] = useMemo(
     () => [
       {
-        label: 'Password',
+        label: 'password',
         field: 'password',
         component: PasswordInput,
       },
       {
-        label: 'Repeat password',
+        label: 'repeatPassword',
         field: 'repeatPassword',
         component: PasswordInput,
       },
@@ -100,7 +106,7 @@ const ChangePasswordForm = () => {
             uiColor="primary"
             className="w-full block"
           >
-            Sign in
+            {tAuth('button.signIn')}
           </Button>
         }
       />
@@ -119,14 +125,14 @@ const ChangePasswordForm = () => {
     >
       {formFields.map(({ field, component: Field, label, rightNode }, idx) => (
         <FormField
-          label={label}
+          label={tAuth(`input.${label}.label`)}
           rightNode={rightNode}
           key={idx}
           {...getFieldMeta(field)}
         >
           <Field
             className={'w-full'}
-            placeholder={label}
+            placeholder={tAuth(`input.${label}.placeholder`)}
             {...getFieldProps(field)}
           />
         </FormField>
@@ -140,7 +146,7 @@ const ChangePasswordForm = () => {
         type="submit"
         isLoading={isSubmitting}
       >
-        Change password
+        {tAuth('button.changePassword')}
       </Button>
     </form>
   );

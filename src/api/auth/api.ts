@@ -1,17 +1,17 @@
+import { axiosClient } from '@/services/axiosInstance';
 import {
   ChangePasswordCredentials,
   ErrorCodeResponse,
+  LoginCredentials,
+  LoginResponse,
   RegistrationCredentials,
   RegistrationResponse,
   ResetPasswordCredentials,
 } from './types';
-import axiosClient from '@/services/axiosInstance';
-
-const axios = axiosClient();
 
 export const register = async (data: RegistrationCredentials) => {
   try {
-    const response = await axios.post<RegistrationResponse>(
+    const response = await axiosClient.post<RegistrationResponse>(
       '/user/sign-up',
       data,
     );
@@ -22,9 +22,19 @@ export const register = async (data: RegistrationCredentials) => {
   }
 };
 
+export const login = async (data: LoginCredentials) => {
+  try {
+    console.log('here');
+    const response = await axiosClient.post<LoginResponse>('/user/login', data);
+    return response.data;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
 export const resetPassword = async (data: ResetPasswordCredentials) => {
   try {
-    const response = await axios.post<ErrorCodeResponse>(
+    const response = await axiosClient.post<ErrorCodeResponse>(
       '/user/password/request-reset',
       data,
     );
@@ -37,7 +47,7 @@ export const resetPassword = async (data: ResetPasswordCredentials) => {
 
 export const changePassword = async (data: ChangePasswordCredentials) => {
   try {
-    const response = await axios.post<ErrorCodeResponse>(
+    const response = await axiosClient.post<ErrorCodeResponse>(
       '/user/password/reset',
       data,
     );

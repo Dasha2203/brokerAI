@@ -9,8 +9,15 @@ import { useErrorBoundary } from 'react-error-boundary';
 import Lottie from 'lottie-react';
 import emailSuccess from '@/animations/email-success.json';
 import { resetPassword } from '@/api/auth';
+import { useTranslations } from 'next-intl';
 
 const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
+  const tAuth = useTranslations('auth');
+  const tButtons = useTranslations('button');
+  const tError = useTranslations('auth.error');
+  const tSuccess = useTranslations('success');
+  const tCommonError = useTranslations('error');
+
   const [isSuccess, setIsSuccess] = useState(false);
   const { showBoundary } = useErrorBoundary();
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
@@ -19,7 +26,9 @@ const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
         email: email || '',
       },
       validationSchema: Yup.object({
-        email: Yup.string().email('Invalid email format').required('Required'),
+        email: Yup.string()
+          .email(tError('email.format'))
+          .required(tError('required')),
       }),
       onSubmit: async (values) => {
         try {
@@ -31,7 +40,7 @@ const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
           const { errorCode } = await resetPassword({ email });
           setIsSuccess(true);
         } catch (err) {
-          showBoundary({ message: 'Не удалось отправить код' });
+          showBoundary({ message: tCommonError('wrong') });
         }
       },
     });
@@ -45,11 +54,9 @@ const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
           className="w-32 h-32 md:w-48 md:h-48 mx-auto"
         />
         <div className="mt-3 text-xl md:text-3xl font-bold text-center">
-          Check your email
+          {tSuccess('checkEmail')}
         </div>
-        <p className="mt-2 text-base md:text-xl">
-          We sended code to your email
-        </p>
+        <p className="mt-2 text-base md:text-xl">{tSuccess('sendedCode')}</p>
       </div>
     );
   }
@@ -64,11 +71,11 @@ const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
         handleSubmit(e);
       }}
     >
-      <FormField label="Email" {...getFieldMeta('email')}>
+      <FormField label={tAuth('input.email.label')} {...getFieldMeta('email')}>
         <Input
           error={getFieldMeta('email').error}
           className={'w-full'}
-          placeholder={'Email'}
+          placeholder={tAuth('input.email.placeholder')}
           {...getFieldProps('email')}
         />
       </FormField>
@@ -81,7 +88,7 @@ const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
           fixedSize
           className="flex-1"
         >
-          Cancel
+          {tButtons('cancel')}
         </Button>
         <Button
           as="button"
@@ -92,7 +99,7 @@ const RequestResetPasswordForm = ({ email, onCancel }: Props) => {
           fixedSize
           isLoading={isSubmitting}
         >
-          Send code
+          {tAuth('button.sendCode')}
         </Button>
       </div>
     </form>

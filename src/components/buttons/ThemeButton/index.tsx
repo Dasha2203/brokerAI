@@ -8,6 +8,7 @@ const ThemeButton = () => {
   const [isDark, setIsDark] = useState(true);
 
   function handleClick() {
+    console.log('click');
     setIsDark((prev) => !prev);
     document.body.classList.toggle('dark');
   }

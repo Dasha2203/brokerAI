@@ -1,0 +1,66 @@
+{
+  "signUp": {
+    "title": "Регистрация"
+  },
+  "signIn": {
+    "title": "Вход"
+  },
+  "button": {
+    "cancel": "Отмена"
+  },
+  "auth": {
+    "input": {
+      "firstName": {
+        "label": "Имя",
+        "placeholder": "Имя"
+      },
+      "lastName": {
+        "label": "Фамилия",
+        "placeholder": "Фамилия"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Пароль"
+      },
+      "newPassword": {
+        "label": "Новый пароль",
+        "placeholder": "Новый пароль"
+      },
+      "repeatPassword": {
+        "label": "Повторите пароль",
+        "placeholder": "Повторите пароль"
+      }
+    },
+    "error": {
+      "email": {
+        "format": "Неверный формат почты"
+      },
+      "password": {
+        "min": "Минимальное количество символов - {count}",
+        "equals": "Пароли не совпадают"
+      },
+      "required": "Обязательно"
+    },
+    "resetPassword": "Сброс пароля",
+    "button": {
+      "changePassword": "Сменить пароль",
+      "sendCode": "Отправить код",
+      "signUp": "Зарегистрироваться",
+      "signIn": "Войти",
+      "forgotPassword": "Забыли пароль",
+      "dontHaveAccount": "У вас нет аккаунта?",
+      "haveAccount": "У вас есть аккаунт?" 
+    }
+  },
+  "error": {
+    "wrong": "Что-то пошло не так"
+  },
+  "success": {
+    "checkEmail": "Проверьте почту",
+    "sendedCode": "Мы отправили код вам на почту"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "signUp": {
+    "title": "Рэгістрацыя"
+  },
+  "signIn": {
+    "title": "Увайдзіце ў сістэму"
+  },
+  "button": {
+    "cancel": "Адмена"
+  },
+  "auth": {
+    "input": {
+      "firstName": {
+        "label": "Імя",
+        "placeholder": "Імя"
+      },
+      "lastName": {
+        "label": "Прозвішча",
+        "placeholder": "Прозвішча"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "password": {
+        "label": "Пароль",
+        "placeholder": "Пароль"
+      },
+      "newPassword": {
+        "label": "Новы пароль",
+        "placeholder": "Новы пароль"
+      },
+      "repeatPassword": {
+        "label": "Паўтарыце пароль",
+        "placeholder": "Паўтарыце пароль"
+      }
+    },
+    "error": {
+      "email": {
+        "format": "Няправільны фармат пошты"
+      },
+      "password": {
+        "min": "Мінімальная колькасць сімвалаў - {count}",
+        "equals": "Паролі не супадаюць"
+      },
+      "required": "Абавязкова"
+    },
+    "resetPassword": "Сброс пароля",
+    "button": {
+      "changePassword": "Змяніць пароль",
+      "sendCode": "Адправіць код",
+      "signUp": "Зарэгістравацца",
+      "signIn": "Увайсці",
+      "forgotPassword": "Забыліся пароль?",
+      "dontHaveAccount": "У вас няма акаунта?",
+      "haveAccount": "У вас ёсць акаунт?" 
+    }
+  },
+  "error": {
+    "wrong": "Нешта пайшло не так"
+  },
+  "success": {
+    "checkEmail": "Праверце пошту",
+    "sendedCode": "Мы адправілі код вам на пошту"
+  }
+}

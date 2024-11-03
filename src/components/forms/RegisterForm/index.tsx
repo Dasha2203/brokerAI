@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '@/components/buttons/Button';
 import Input from '@/components/forms/Input';
 import * as Yup from 'yup';
@@ -9,6 +9,7 @@ import useForm from '@/hooks/useForm';
 import { FormValues } from './types';
 import { register } from '@/api/auth';
 import Link from '@/components/Link';
+import { useTranslations } from 'next-intl';
 
 const formFields: {
   label: string;
@@ -17,33 +18,39 @@ const formFields: {
   component: React.ComponentType<any>;
 }[] = [
   {
-    label: 'First name',
+    label: 'firstName',
     field: 'firstName',
     component: Input,
   },
   {
-    label: 'Last name',
+    label: 'lastName',
     field: 'lastName',
     component: Input,
   },
   {
-    label: 'Email',
+    label: 'email',
     field: 'email',
     component: Input,
   },
   {
-    label: 'Password',
+    label: 'password',
     field: 'password',
     component: PasswordInput,
   },
   {
-    label: 'Repeat password',
+    label: 'repeatPassword',
     field: 'repeatPassword',
     component: PasswordInput,
   },
 ];
 
+const minCountPass = 6;
+
 const RegisterForm = () => {
+  const tAuth = useTranslations('auth');
+  const tError = useTranslations('auth.error');
+  const tCommonError = useTranslations('error');
+  const [error, setError] = useState('');
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting, setErrors } =
     useForm<FormValues>({
       initialValues: {
@@ -54,36 +61,69 @@ const RegisterForm = () => {
         repeatPassword: '',
       },
       validationSchema: Yup.object({
-        firstName: Yup.string().required('Required'),
-        lastName: Yup.string().required('Required'),
+        firstName: Yup.string().required(tError('required')),
+        lastName: Yup.string().required(tError('required')),
         password: Yup.string()
-          .min(6, 'Minimal 6 symbols')
+          .min(minCountPass, tError('password.min', { count: minCountPass }))
           .nullable()
-          .required('field is empty'),
+          .required(tError('required')),
         repeatPassword: Yup.string()
-          .min(6, 'Minimal 6 symbols')
+          .min(minCountPass, tError('password.min', { count: minCountPass }))
           .nullable()
-          .required('field is empty'),
-        email: Yup.string().email('Invalid email format').required('Required'),
+          .required(tError('required')),
+        email: Yup.string()
+          .email(tError('email.format'))
+          .required(tError('required')),
       }),
       onSubmit: async (values) => {
+        setError('');
         const { firstName, lastName, email, password, repeatPassword } = values;
+
         if (!email || !password || !repeatPassword || !firstName || !lastName) {
           return;
         }
+
         if (password !== repeatPassword) {
-          setErrors({ repeatPassword: 'Пароли должны совпадать' });
+          setErrors({ repeatPassword: tError('password.equals') });
           return;
         }
 
-        await register({
-          firstName,
-          languageCode: 'en',
-          lastName,
-          password,
-          email,
-          countryCode: 'US',
-        });
+        try {
+          const { data, errorCode } = await register({
+            firstName,
+            languageCode: 'en',
+            lastName,
+            password,
+            email,
+            countryCode: 'US',
+          });
+
+          if (errorCode || !data) {
+            setError(errorCode);
+            return;
+          }
+
+          const {
+            accessToken,
+            refreshToken,
+            accessTokenExpiration,
+            refreshTokenExpiration,
+          } = data;
+
+          localStorage.setItem('accessToken', accessToken);
+          localStorage.setItem('refreshToken', refreshToken);
+          localStorage.setItem(
+            'accessTokenExpiration',
+            accessTokenExpiration.toString(),
+          );
+          localStorage.setItem(
+            'refreshTokenExpiration',
+            refreshTokenExpiration.toString(),
+          );
+        } catch (err) {
+          console.log(err);
+          setError(tCommonError('wrong'));
+        }
       },
     });
 
@@ -98,14 +138,20 @@ const RegisterForm = () => {
       }}
     >
       {formFields.map(({ field, component: Field, label }, idx) => (
-        <FormField label={label} key={idx} {...getFieldMeta(field)}>
+        <FormField
+          label={tAuth(`input.${label}.label`)}
+          key={idx}
+          {...getFieldMeta(field)}
+        >
           <Field
             className={'w-full'}
-            placeholder={label}
+            placeholder={tAuth(`input.${label}.placeholder`)}
             {...getFieldProps(field)}
           />
         </FormField>
       ))}
+
+      {error && <span className="text-red">{error}</span>}
 
       <Button
         as="button"
@@ -116,10 +162,10 @@ const RegisterForm = () => {
         className="w-full"
         type="submit"
       >
-        {isSubmitting ? 'Loading...' : 'Sign up'}
+        {tAuth('button.signUp')}
       </Button>
       <Link as="link" href="/auth/login" className="text-center">
-        You don't have an account ?
+        {tAuth('button.haveAccount')}
       </Link>
     </form>
   );

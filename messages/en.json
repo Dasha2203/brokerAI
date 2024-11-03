@@ -1,0 +1,66 @@
+{
+  "signUp": {
+    "title": "Sign up"
+  },
+  "signIn": {
+    "title": "Sign in"
+  },
+  "button": {
+    "cancel": "Cancel"
+  },
+  "auth": {
+    "input": {
+      "firstName": {
+        "label": "First name",
+        "placeholder": "First name"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeholder": "Last name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Password"
+      },
+      "newPassword": {
+        "label": "New password",
+        "placeholder": "New password"
+      },
+      "repeatPassword": {
+        "label": "Repeat password",
+        "placeholder": "Repeat password"
+      }
+    },
+    "error": {
+      "email": {
+        "format": "Invalid email format"
+      },
+      "password": {
+        "min": "Minimal {count} symbols",
+        "equals": "Passwords must match"
+      },
+      "required": "Required"
+    },
+    "resetPassword": "Reset password",
+    "button": {
+      "changePassword": "Change password",
+      "sendCode": "Send code",
+      "signUp": "Sign up",
+      "signIn": "Sing in",
+      "forgotPassword": "Forgot password",
+      "dontHaveAccount": "You don't have an account?",
+      "haveAccount": "You have an account?" 
+    }
+  },
+  "error": {
+    "wrong": "Something went wrong"
+  },
+  "success": {
+    "checkEmail": "Check your email",
+    "sendedCode": "We sended code to your email"
+  }
+}

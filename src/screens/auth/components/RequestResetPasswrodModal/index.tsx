@@ -3,14 +3,17 @@ import RequestResetPasswordForm from '@/components/forms/RequestResetPasswordFor
 import Modal from '@/components/Modal';
 import { ErrorBoundary } from 'react-error-boundary';
 import { Props } from './types';
+import { useTranslations } from 'next-intl';
 
 const RequestResetPasswordModal = ({ email, ...props }: Props) => {
+  const tAuth = useTranslations('auth');
+
   function handleClose() {
     props.context.onOpenChange(false);
   }
 
   return (
-    <Modal header="Reset password" {...props}>
+    <Modal header={tAuth('resetPassword')} {...props}>
       <ErrorBoundary
         FallbackComponent={(props) => (
           <DefaultError {...props} className="my-auto" />
