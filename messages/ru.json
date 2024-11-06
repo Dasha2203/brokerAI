@@ -56,6 +56,12 @@
       "haveAccount": "У вас есть аккаунт?" 
     }
   },
+  "common": {
+    "language": {
+      "changeLang": "Сменить язык",
+      "toggleLang": "Переключить язык"
+    }
+  },
   "error": {
     "wrong": "Что-то пошло не так"
   },

@@ -24,7 +24,6 @@ export const register = async (data: RegistrationCredentials) => {
 
 export const login = async (data: LoginCredentials) => {
   try {
-    console.log('here');
     const response = await axiosClient.post<LoginResponse>('/user/login', data);
     return response.data;
   } catch (err: any) {

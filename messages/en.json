@@ -56,6 +56,12 @@
       "haveAccount": "You have an account?" 
     }
   },
+  "common": {
+    "language": {
+      "changeLang": "Change language",
+      "toggleLang": "Toggle language"
+    }
+  },
   "error": {
     "wrong": "Something went wrong"
   },
