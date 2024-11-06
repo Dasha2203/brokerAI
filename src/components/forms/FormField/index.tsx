@@ -5,8 +5,8 @@ const FormField = ({ label, error, rightNode, children, ...props }: Props) => {
   return (
     <div {...props}>
       {label && (
-        <div className="flex justify-between">
-          <label className="mb-3.5 font-Open-Sans block font-bold text-[#C7C7C7] uppercase">
+        <div className="mb-3.5 flex justify-between items-center">
+          <label className="font-Open-Sans block font-bold text-[#C7C7C7] uppercase">
             {label}
           </label>
           {rightNode || null}

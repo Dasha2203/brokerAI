@@ -1,3 +1,5 @@
+'use client';
+import LanguageBtn from '@/components/buttons/LanguageBtn';
 import ThemeButton from '@/components/buttons/ThemeButton';
 import clsx from 'clsx';
 import React from 'react';
@@ -13,6 +15,8 @@ const Header = () => {
     >
       <div className="flex justify-between items-center mx-auto w-full px-4 lg:px-8 max-w-[1376px]">
         <div className="font-bold text-2xl">Logo</div>
+        <LanguageBtn className="ml-auto" />
+        {/* <Select /> */}
         <ThemeButton />
       </div>
     </header>
