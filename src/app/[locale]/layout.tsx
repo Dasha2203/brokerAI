@@ -7,6 +7,8 @@ import Layout from '@/components/layout/Layout';
 
 import clsx from 'clsx';
 import { Cairo, Open_Sans } from 'next/font/google';
+import { Provider } from 'react-redux';
+import { setupStore } from '@/store';
 
 const cairo = Cairo({
   subsets: ['latin'],
@@ -17,6 +19,8 @@ const openSans = Open_Sans({
   subsets: ['latin'],
   weight: ['400', '600', '700'],
 });
+
+const store = setupStore();
 
 export default async function LocaleLayout({
   children,
@@ -43,9 +47,11 @@ export default async function LocaleLayout({
           'text-blck dark:text-white dark:bg-violet-900 min-h-[100svh]',
         )}
       >
-        <NextIntlClientProvider messages={messages}>
-          <Layout>{children}</Layout>
-        </NextIntlClientProvider>
+        <Provider store={store}>
+          <NextIntlClientProvider messages={messages}>
+            <Layout>{children}</Layout>
+          </NextIntlClientProvider>
+        </Provider>
       </body>
     </html>
   );

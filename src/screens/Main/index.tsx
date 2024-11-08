@@ -1,3 +1,5 @@
+import { useAppSelector } from "@/hooks/redux"
+
 const Main = () => {
   return (
     <div>
