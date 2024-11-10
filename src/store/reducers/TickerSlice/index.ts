@@ -1,5 +1,5 @@
 import { ITicker } from "@/models/ITicker";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { error } from "console";
 
 interface TickerState {
@@ -15,7 +15,9 @@ export const tickerSlice = createSlice({
   name: 'ticker',
   initialState,
   reducers: {
-
+    fetchingSuccess(state, action: PayloadAction<ITicker[]>) {
+      state.tickers = action.payload;
+    }
   }
 })
 

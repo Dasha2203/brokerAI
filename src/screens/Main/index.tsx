@@ -1,9 +1,11 @@
+'use client';
 import { useAppSelector } from "@/hooks/redux"
 
 const Main = () => {
+  const {tickers} = useAppSelector((state) => state.tickerReducer)
   return (
     <div>
-      Main
+      {tickers.length ? 'MANY': 'NONR'}
     </div>
   )
 }

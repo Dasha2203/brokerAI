@@ -5,12 +5,12 @@ const rootReducer = combineReducers({
   tickerReducer,
 });
 
-export const setupStore = () => {
+export const makeStore = () => {
   return configureStore({
     reducer: rootReducer,
   });
 };
 
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
+export type AppStore = ReturnType<typeof makeStore>;
 export type AppDispatch = AppStore['dispatch'];
