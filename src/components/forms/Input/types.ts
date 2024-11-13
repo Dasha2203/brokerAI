@@ -6,4 +6,5 @@ export type InputProps = InputCommonProps<string> &
     rightIcon?: React.ReactNode;
     leftIcon?: React.ReactNode;
     error?: string;
+    size?: 'lg' | 'base';
   };

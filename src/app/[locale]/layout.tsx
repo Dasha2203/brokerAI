@@ -45,11 +45,11 @@ export default async function LocaleLayout({
         className={clsx(
           cairo.className,
           openSans.className,
-          'text-blck dark:text-white dark:bg-violet-900 min-h-[100svh]',
+          'text-blck dark:text-white bg-[#F9F9F9] dark:bg-violet-900 min-h-[100svh]',
         )}
       >
         <StoreProvider>
-        <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider messages={messages}>
             <Layout>{children}</Layout>
           </NextIntlClientProvider>
         </StoreProvider>

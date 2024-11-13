@@ -8,6 +8,24 @@
   "button": {
     "cancel": "Cancel"
   },
+  "stockpacks": {
+    "create": "Create invest portfolio",
+    "color": "Color",
+    "portfolioName": "Porfolio name",
+    "input": {
+      "name": {
+        "label": "Porfolio name",
+        "placeholder": "Name"
+      },
+      "color": {
+        "label": "Select color"
+      }
+    },
+    "button": {
+      "create": "Create",
+      "cancel": "Cancel"
+    }
+  },
   "auth": {
     "input": {
       "firstName": {
