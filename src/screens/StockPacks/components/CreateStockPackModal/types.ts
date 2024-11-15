@@ -1,5 +1,6 @@
 import { ModalProps } from '@/components/Modal/types';
+import { IStockPack } from '@/models/IStockPack';
 
 export type Props = Omit<ModalProps, 'children'> & {
-  email?: string;
+  data?: Partial<IStockPack>;
 };

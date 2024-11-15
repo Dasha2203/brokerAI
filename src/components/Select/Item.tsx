@@ -20,7 +20,7 @@ const Item = ({
     <li>
       <button
         className={clsx(
-          'px-6 py-2 cursor-pointer font-bold w-full transition-colors',
+          'px-6 py-2 cursor-pointer font-bold w-full transition-colors text-left',
           {
             'text-violet-700 bg-[#F6EEFF] dark:text-white dark:bg-violet-300':
               active,

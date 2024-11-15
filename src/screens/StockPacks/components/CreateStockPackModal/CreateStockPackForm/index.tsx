@@ -8,13 +8,20 @@ import FormField from '@/components/forms/FormField';
 import Input from '@/components/forms/Input';
 import Colorpicker from '@/components/Colorpicker';
 import Button from '@/components/buttons/Button';
+import { useAppDispatch } from '@/hooks/redux';
+import {
+  createStockPack,
+  updateStockPack,
+} from '@/store/reducers/UserSlice/actionCreators';
+import { Props } from './types';
 
-const CreateStockPackForm = () => {
+const CreateStockPackForm = ({ data, onSubmit }: Props) => {
   const t = useTranslations('stockpacks');
   const tError = useTranslations('auth.error');
   const tCommonError = useTranslations('error');
+  const dispatch = useAppDispatch();
   const { showBoundary } = useErrorBoundary();
-  const [color, setColor] = useState('');
+  const [color, setColor] = useState(data?.color || '');
   const containerRef = useRef<HTMLDivElement | null>(null);
   const {
     getFieldMeta,
@@ -24,7 +31,7 @@ const CreateStockPackForm = () => {
     setFieldError,
   } = useForm<FormValues>({
     initialValues: {
-      name: '',
+      name: data?.stockPackName || '',
     },
     validationSchema: Yup.object({
       name: Yup.string().required(tError('required')),
@@ -38,11 +45,24 @@ const CreateStockPackForm = () => {
       }
 
       try {
-        // await changePassword({
-        //   newPassword: password,
-        //   code,
-        // });
-        // setIsSuccess(true);
+        if (data?.stockPackId) {
+          await dispatch(
+            updateStockPack({
+              stockPackId: data.stockPackId,
+              color,
+              stockPackName: name,
+            }),
+          );
+          onSubmit();
+          return;
+        }
+        await dispatch(
+          createStockPack({
+            color,
+            stockPackName: name,
+          }),
+        );
+        onSubmit();
       } catch (err) {
         console.log(err);
         showBoundary({ message: tCommonError('wrong') });
@@ -89,7 +109,7 @@ const CreateStockPackForm = () => {
           fixedSize
           isLoading={isSubmitting}
         >
-          {t('button.create')}
+          {data ? t('button.edit') : t('button.create')}
         </Button>
       </div>
     </form>

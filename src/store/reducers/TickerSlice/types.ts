@@ -4,8 +4,12 @@ export type ErrorCodeResponse = {
   errorCode: string;
 };
 
+export type Ticker = ITicker & {
+  bookmarked: boolean;
+};
+
 export type TickerResponse = ErrorCodeResponse & {
-  data: ITicker[];
+  data: Ticker[];
   total: number;
 };
 

@@ -8,7 +8,11 @@ import Trow from '@/components/table/TRow';
 import PageContainer from '@/components/ui/PageContainer';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import SearchIcon from '@/icons/SearchIcon';
-import { fetchTickers } from '@/store/reducers/TickerSlice/actionCreators';
+import {
+  AddBookmarkTicker,
+  fetchTickers,
+  removeBookmarkTicker,
+} from '@/store/reducers/TickerSlice/actionCreators';
 import { useEffect, useState } from 'react';
 import FavoritesIcon from '@/icons/FavoritesIcon';
 import ButtonIcon from '@/components/buttons/ButtonIcon';
@@ -32,7 +36,19 @@ const Tickers = () => {
     }
   }
 
-  function handleBookmark() {}
+  function handleBookmark({
+    bookmarked,
+    stockId,
+  }: {
+    bookmarked: boolean;
+    stockId: string;
+  }) {
+    if (bookmarked) {
+      dispatch(removeBookmarkTicker({ stockId }));
+      return;
+    }
+    dispatch(AddBookmarkTicker({ stockId }));
+  }
 
   return (
     <PageContainer>
@@ -64,7 +80,15 @@ const Tickers = () => {
           <Th>Price</Th>
         </Trow>
         {tickers.map(
-          ({ industryKey, sectorKey, stockId, ticker, name, actualPrice }) => (
+          ({
+            industryKey,
+            sectorKey,
+            stockId,
+            ticker,
+            name,
+            actualPrice,
+            bookmarked,
+          }) => (
             <Trow
               key={stockId}
               className="items-center"
@@ -75,10 +99,13 @@ const Tickers = () => {
             >
               <Td className="flex items-center">
                 <ButtonIcon
-                  active
-                  onClick={handleBookmark}
+                  active={bookmarked}
+                  onClick={() => handleBookmark({ stockId, bookmarked })}
                   icon={FavoritesIcon}
-                  color="yellow"
+                  color={'yellow'}
+                  aria-label={
+                    bookmarked ? 'Remove from bookmark' : 'Add to bookmark'
+                  }
                 />
               </Td>
               <Td className="flex items-center">{ticker}</Td>
