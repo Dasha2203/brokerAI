@@ -2,7 +2,7 @@ import React from 'react';
 import { Props } from './types';
 import clsx from 'clsx';
 
-const Trow = ({ style, className, children }: Props) => {
+const Trow = ({ style, className, children, ...props }: Props) => {
   return (
     <div
       className={clsx(
@@ -11,6 +11,7 @@ const Trow = ({ style, className, children }: Props) => {
         className,
       )}
       style={style}
+      {...props}
     >
       {children}
     </div>

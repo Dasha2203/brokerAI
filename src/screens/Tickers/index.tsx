@@ -16,10 +16,12 @@ import {
 import { useEffect, useState } from 'react';
 import FavoritesIcon from '@/icons/FavoritesIcon';
 import ButtonIcon from '@/components/buttons/ButtonIcon';
+import { useRouter } from 'next/navigation';
 
 const Tickers = () => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState('');
+  const router = useRouter();
   const { tickers } = useAppSelector((state) => state.tickerReducer);
 
   useEffect(() => {
@@ -91,7 +93,11 @@ const Tickers = () => {
           }) => (
             <Trow
               key={stockId}
-              className="items-center"
+              className="items-center cursor-pointer"
+              onClick={() => {
+                console.log('click');
+                router.push(`/tickers/${stockId}`);
+              }}
               style={{
                 gridTemplateColumns:
                   'minmax(92px, 92px) minmax(32px, 32fr) minmax(32px, 32fr) minmax(32px, 32fr) minmax(32px, 32fr) minmax(32px, 32fr)',
