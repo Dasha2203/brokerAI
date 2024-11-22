@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import tickerReducer from './reducers/TickerSlice';
 import userReducer from './reducers/UserSlice';
+import requestReducer from './reducers/RequestsSlice';
 
 const rootReducer = combineReducers({
   tickerReducer,
   userReducer,
+  requestReducer,
 });
 
 export const makeStore = () => {

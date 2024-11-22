@@ -7,6 +7,7 @@ import PageContainer from '@/components/ui/PageContainer';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { fetchStockPacks } from '@/store/reducers/UserSlice/actionCreators';
 import StockPackCard from '@/components/StockPackCard';
+import Link from 'next/link';
 
 const StockPacks = () => {
   const { stockpacks } = useAppSelector((state) => state.userReducer);
@@ -45,7 +46,9 @@ const StockPacks = () => {
       </div>
       <div className="grid grid-cols-4 gap-7">
         {stockpacks.list.map((data) => (
-          <StockPackCard key={data.stockPackId} data={data} />
+          <Link key={data.stockPackId} href={`/stockpacks/${data.stockPackId}`}>
+            <StockPackCard key={data.stockPackId} data={data} />
+          </Link>
         ))}
       </div>
 

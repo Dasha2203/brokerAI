@@ -24,6 +24,20 @@ export const fetchStockPacks =
     }
   };
 
+export const fetchStockPack =
+  ({ stockPackId }: { stockPackId: string }) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      const data = await authAxios.get<StockPackResponse>(
+        `/stock-pack/${stockPackId}`,
+      );
+      dispatch(userSlice.actions.fetchingSuccess(data.data.data));
+    } catch (err) {
+      console.log(err);
+      console.log('fetch tickers error');
+    }
+  };
+
 export const createStockPack =
   ({ color, stockPackName }: CreateStockPackCredentials) =>
   async (dispatch: AppDispatch) => {

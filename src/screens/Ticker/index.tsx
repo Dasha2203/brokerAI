@@ -42,7 +42,7 @@ const Ticker = () => {
         EndAt: endDate?.toISOString(),
       });
       setHistory(
-        data.data.map((i) => ({
+        data.data.history.map((i) => ({
           ...i,
           timestamp: new Date(i.timestamp).toLocaleDateString('ru-RU', {
             day: '2-digit',

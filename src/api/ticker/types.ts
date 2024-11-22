@@ -11,7 +11,9 @@ export type TickerHistoryItem = {
 
 export type TickerHistoryResponse = {
   errorCode: string;
-  data: TickerHistoryItem[];
+  data: {
+    history: TickerHistoryItem[];
+  };
 };
 
 export type BuyTickerResponse = {
