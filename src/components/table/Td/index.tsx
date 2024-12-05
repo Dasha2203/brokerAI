@@ -3,16 +3,19 @@ import { Props } from './types';
 
 const Td = ({ style, className, children }: Props) => {
   return (
-    <div
+    <td
       style={style}
       className={clsx(
-        'first:pl-7 last:pr-14 text-black pt-8 pb-6',
-        'dark:text-white',
+        'first:pl-7 last:pr-14 text-black py-5',
+        // light
+        'bg-white',
+        // dark
+        'dark:text-white dark:bg-violet-800',
         className,
       )}
     >
       {children}
-    </div>
+    </td>
   );
 };
 

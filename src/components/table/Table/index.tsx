@@ -1,20 +1,22 @@
 import React from 'react';
-import { Props } from './types';
 import clsx from 'clsx';
+import { Props } from './types';
 
 const Table = ({ style, children, className }: Props) => {
   return (
-    <div
+    <table
       style={style}
       className={clsx(
-        'rounded-[14px]',
-        'bg-white ',
+        'rounded-[14px] w-full',
+        // light
+        'bg-white',
+        // dark
         'dark:bg-violet-800 dark:text-white',
         className,
       )}
     >
       {children}
-    </div>
+    </table>
   );
 };
 
