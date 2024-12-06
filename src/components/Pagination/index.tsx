@@ -33,13 +33,19 @@ const Pagination = ({ total, count, active, className, setActive }: Props) => {
 
   function handleChangePage(page: number) {
     setActive(page);
+    window.scrollTo(0, 0);
   }
 
   if (total < count || countPages <= 1) return null;
 
   return (
-    <div className={clsx('flex justify-between items-center', className)}>
-      <div className="text-base">
+    <div
+      className={clsx(
+        'flex flex-col md:flex-row gap-6 justify-between items-center text-center',
+        className,
+      )}
+    >
+      <div className="text-base order-2 md:order-1">
         {t.rich('infoShowResult', {
           from,
           to,
@@ -47,7 +53,11 @@ const Pagination = ({ total, count, active, className, setActive }: Props) => {
           bold: (chunks) => <span className="font-bold">{chunks}</span>,
         })}
       </div>
-      <div className={clsx('flex ml-auto items-center w-fit gap-2.5')}>
+      <div
+        className={clsx(
+          'mx-auto flex md:mr-0 items-center w-fit gap-2.5 order-1 md:order-2',
+        )}
+      >
         {countPages > COUNT_VISIBLE ? (
           <Button
             as="button"
@@ -74,6 +84,7 @@ const Pagination = ({ total, count, active, className, setActive }: Props) => {
               as="button"
               uiColor={i === active ? 'primary' : undefined}
               variant="contained"
+              fixedSize
               className="w-full aspect-square"
               onClick={() => handleChangePage(i)}
             >
