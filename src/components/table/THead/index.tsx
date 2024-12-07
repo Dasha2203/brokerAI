@@ -1,14 +1,17 @@
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { Props } from './types';
-import { useEffect, useState } from 'react';
+import useChangeSize from '@/hooks/useChangeSize';
 
 const THead = ({ children, className, style, ...props }: Props) => {
   const [top, setTop] = useState(0);
 
+  const { width: windowWidth } = useChangeSize();
+
   useEffect(() => {
     const header = document.querySelector('header');
     setTop(header?.clientHeight || 0);
-  }, []);
+  }, [windowWidth]);
 
   return (
     <thead

@@ -1,8 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
 import { Props } from './types';
+import Caption from '../Caption';
 
-const Table = ({ style, children, className }: Props) => {
+const Table = ({ caption, style, children, className }: Props) => {
   return (
     <table
       style={style}
@@ -15,6 +16,7 @@ const Table = ({ style, children, className }: Props) => {
         className,
       )}
     >
+      {caption && <Caption text={caption} />}
       {children}
     </table>
   );

@@ -1,5 +1,3 @@
-import { StyledProps } from '@/types/ui';
+import { ThHTMLAttributes } from 'react';
 
-export type Props = StyledProps & {
-  children: React.ReactNode;
-};
+export type Props = ThHTMLAttributes<HTMLTableCellElement>;

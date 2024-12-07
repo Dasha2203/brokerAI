@@ -6,7 +6,8 @@ const Trow = ({ style, className, children, ...props }: Props) => {
   return (
     <tr
       className={clsx(
-        'border-b-2  last:border-b-0 transition-shadow overflow-hidden',
+        'relative hover:z-[1] border-b-2 last:border-b-0 transition-shadow overflow-hidden',
+        'last:rounded-bl-xl last:rounded-br-xl',
         // light
         'border-[#F4F4F4] hover:shadow-[0_1px_28px_0_rgba(0,0,0,.12)]',
         // dark

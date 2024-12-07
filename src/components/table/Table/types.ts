@@ -1,3 +1,5 @@
 import { TableHTMLAttributes } from 'react';
 
-export type Props = TableHTMLAttributes<HTMLTableElement>;
+export type Props = TableHTMLAttributes<HTMLTableElement> & {
+  caption?: string;
+};
