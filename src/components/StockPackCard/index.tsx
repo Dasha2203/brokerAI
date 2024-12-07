@@ -8,8 +8,10 @@ import { removeStockPack } from '@/store/reducers/UserSlice/actionCreators';
 import { useAppDispatch } from '@/hooks/redux';
 import useModal from '@/hooks/useModal';
 import CreateStockPackModal from '@/screens/StockPacks/components/CreateStockPackModal';
+import { useTranslations } from 'use-intl';
 
-const StockPackCard = ({ data }: Props) => {
+const StockPackCard = ({ data, ...props }: Props) => {
+  const t = useTranslations('stockpacks');
   const { active, color, stockPackName, totalCostStocks, stockPackId } = data;
   const dispatch = useAppDispatch();
   const modal = useModal();
@@ -18,13 +20,13 @@ const StockPackCard = ({ data }: Props) => {
     onClick: () => Promise<void>;
   }[] = [
     {
-      label: 'Remove',
+      label: t('button.remove'),
       onClick: async () => {
         await dispatch(removeStockPack({ stockPackId }));
       },
     },
     {
-      label: 'Edit',
+      label: t('button.edit'),
       onClick: async () => {
         modal.setIsOpen(true);
       },
@@ -39,14 +41,14 @@ const StockPackCard = ({ data }: Props) => {
   }
 
   return (
-    <div className={clsx('bg-white', '', 'relative p-7 rounded-xl')}>
+    <div className={clsx('bg-white', 'relative p-7 rounded-xl')} {...props}>
       {active && (
         <Select
-          title={'title'}
+          title={t('button.chooseAction')}
           control={
             <ButtonIcon
               icon={OptionsIcon}
-              aria-label={'dkkdkd'}
+              aria-label={t('button.chooseAction')}
               className="absolute top-0 right-0"
             />
           }
