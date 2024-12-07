@@ -4,18 +4,24 @@ import {
   AddBookmarkTickerResponse,
   RemoveBookmarkTickerResponse,
   TickerResponse,
+  TickersCredentials,
 } from './types';
 import { tickerSlice } from '.';
 
 export const fetchTickers =
-  ({ TicketName }: { TicketName?: string }) =>
+  ({
+    TicketName,
+    Limit = 20,
+    Offset = 0,
+    OnlyFavorite = false,
+  }: TickersCredentials) =>
   async (dispatch: AppDispatch) => {
     try {
       console.log('query smth');
       const data = await authAxios.get<TickerResponse>('/ticket', {
-        params: { limit: 5, TicketName },
+        params: { limit: Limit, TicketName, Offset, OnlyFavorite },
       });
-      dispatch(tickerSlice.actions.fetchingSuccess(data.data.data));
+      dispatch(tickerSlice.actions.fetchingSuccess(data.data));
     } catch (err) {
       console.log(err);
       console.log('fetch tickers error');

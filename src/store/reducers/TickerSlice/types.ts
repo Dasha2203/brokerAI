@@ -8,6 +8,13 @@ export type Ticker = ITicker & {
   bookmarked: boolean;
 };
 
+export type TickersCredentials = {
+  TicketName?: string;
+  Limit?: number;
+  Offset?: number;
+  OnlyFavorite?: boolean;
+};
+
 export type TickerResponse = ErrorCodeResponse & {
   data: Ticker[];
   total: number;

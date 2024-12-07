@@ -1,21 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Ticker } from './types';
+import { Ticker, TickerResponse } from './types';
 
 interface TickerState {
   tickers: Ticker[];
   error: string;
+  total: number;
 }
 const initialState: TickerState = {
   tickers: [],
   error: '',
+  total: 0,
 };
 
 export const tickerSlice = createSlice({
   name: 'ticker',
   initialState,
   reducers: {
-    fetchingSuccess(state, action: PayloadAction<Ticker[]>) {
-      state.tickers = action.payload;
+    fetchingSuccess(state, action: PayloadAction<TickerResponse>) {
+      state.tickers = action.payload.data;
+      state.total = action.payload.total;
     },
     addToBookmark(state, action: PayloadAction<string>) {
       const id = action.payload;
