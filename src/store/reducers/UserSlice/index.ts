@@ -1,10 +1,11 @@
 import { IStockPack } from '@/models/IStockPack';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { UpdateStockPackCredentials } from './types';
+import { StockPackResponse, UpdateStockPackCredentials } from './types';
 
 interface UserSlice {
   stockpacks: {
     list: IStockPack[];
+    total: number;
     error: string;
   };
 }
@@ -12,6 +13,7 @@ interface UserSlice {
 const initialState: UserSlice = {
   stockpacks: {
     list: [],
+    total: 0,
     error: '',
   },
 };
@@ -48,9 +50,10 @@ export const userSlice = createSlice({
         ];
       }
     },
-    fetchingSuccess(sate, action: PayloadAction<IStockPack[]>) {
-      sate.stockpacks.list = action.payload;
-      sate.stockpacks.error = '';
+    fetchingSuccess(state, action: PayloadAction<StockPackResponse>) {
+      state.stockpacks.list = action.payload.data;
+      state.stockpacks.total = action.payload.total;
+      state.stockpacks.error = '';
     },
   },
 });

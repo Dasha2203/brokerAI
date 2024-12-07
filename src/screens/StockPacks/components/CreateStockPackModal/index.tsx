@@ -1,14 +1,17 @@
 'use client';
+import { ErrorBoundary } from 'react-error-boundary';
+import { useTranslations } from 'use-intl';
 import DefaultError from '@/components/errors/DefaultError';
 import Modal from '@/components/Modal';
-import { ErrorBoundary } from 'react-error-boundary';
 import CreateStockPackForm from './CreateStockPackForm';
 import { Props } from './types';
 
 const CreateStockPackModal = ({ data, ...props }: Props) => {
+  const t = useTranslations('stockpacks');
+
   return (
     <Modal
-      header={data ? 'Edit ' + data?.stockPackName : 'Create Invest Portfolio'}
+      header={data ? t('edit', { name: data.stockPackName }) : t('create')}
       {...props}
     >
       <ErrorBoundary

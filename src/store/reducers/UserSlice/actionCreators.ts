@@ -11,13 +11,13 @@ import {
 import { userSlice } from '.';
 
 export const fetchStockPacks =
-  ({ StockPackName }: { StockPackName?: string }) =>
+  ({ StockPackName, limit, Offset }: { StockPackName?: string; limit?: number, Offset?: number }) =>
   async (dispatch: AppDispatch) => {
     try {
       const data = await authAxios.get<StockPackResponse>('/stock-pack', {
-        params: { limit: 5, StockPackName, OnlyActive: true },
+        params: { limit, StockPackName, OnlyActive: true, Offset },
       });
-      dispatch(userSlice.actions.fetchingSuccess(data.data.data));
+      dispatch(userSlice.actions.fetchingSuccess(data.data));
     } catch (err) {
       console.log(err);
       console.log('fetch tickers error');

@@ -1,30 +1,74 @@
 'use client';
+import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import clsx from 'clsx';
 import Button from '@/components/buttons/Button';
-import useModal from '@/hooks/useModal';
-import React, { useEffect } from 'react';
-import CreateStockPackModal from './components/CreateStockPackModal';
+import Pagination from '@/components/Pagination';
+import StockPackCard from '@/components/StockPackCard';
 import PageContainer from '@/components/ui/PageContainer';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import useModal from '@/hooks/useModal';
 import { fetchStockPacks } from '@/store/reducers/UserSlice/actionCreators';
-import StockPackCard from '@/components/StockPackCard';
-import Link from 'next/link';
+import CreateStockPackModal from './components/CreateStockPackModal';
+
+const COUNT_VISIBLE = 20;
 
 const StockPacks = () => {
+  const t = useTranslations('stockpacks');
+  const [page, setPage] = useState(1);
+  const router = useRouter();
   const { stockpacks } = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const modal = useModal();
+
   function handleClick() {
     modal.setIsOpen(true);
   }
 
   useEffect(() => {
-    dispatch(fetchStockPacks({}));
-  }, []);
+    dispatch(
+      fetchStockPacks({
+        limit: COUNT_VISIBLE,
+        Offset: (page - 1) * COUNT_VISIBLE,
+      }),
+    );
+  }, [page]);
 
   return (
     <PageContainer>
-      <h1 className="font-bold text-4xl">Invest portfolio</h1>
-      <div className="my-9 p-7 flex justify-between items-center bg-white rounded-xl">
+      <h1 className="font-bold text-4xl">{t('stockpacksTitle')}</h1>
+
+      <div
+        className={clsx(
+          'my-6 p-7 rounded-[14px]',
+          'bg-white',
+          'dark:bg-violet-500',
+        )}
+      >
+        <div className="text-2xl font-semibold">
+          {t('totalStockPacks')}: <span className="">{stockpacks.total}</span>
+        </div>
+        <div className="mt-9 flex flex-col gap-3 md:flex-row md:gap-6">
+          <Button
+            as="button"
+            uiColor="primary"
+            variant="contained"
+            onClick={handleClick}
+          >
+            {t('button.createNewStockPack')}
+          </Button>
+          <Button
+            as="link"
+            href={'/stockpacks-analysis'}
+            uiColor="primary"
+            variant="outlined"
+          >
+            {t('button.showAnalysis')}
+          </Button>
+        </div>
+      </div>
+      {/* <div className="my-9 p-7 flex justify-between items-center bg-white rounded-xl">
         <div className="flex gap-4 items-center font-semibold text-gray-300 text-2xl">
           Total cost:{' '}
           <span className="text-black text-3xl">
@@ -35,22 +79,29 @@ const StockPacks = () => {
             }).format(100000)}
           </span>
         </div>
-        <Button
-          as="button"
-          uiColor="primary"
-          variant="contained"
-          onClick={handleClick}
-        >
-          Create
-        </Button>
-      </div>
-      <div className="grid grid-cols-4 gap-7">
+      </div> */}
+      <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-7 ">
         {stockpacks.list.map((data) => (
-          <Link key={data.stockPackId} href={`/stockpacks/${data.stockPackId}`}>
-            <StockPackCard key={data.stockPackId} data={data} />
-          </Link>
+          <StockPackCard
+            key={data.stockPackId}
+            data={data}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              console.log('here', e.target);
+              router.push(`/stockpacks/${data.stockPackId}`);
+            }}
+          />
         ))}
       </div>
+
+      <Pagination
+        className="mt-10 ml-auto"
+        total={stockpacks.total}
+        count={COUNT_VISIBLE}
+        active={page}
+        setActive={setPage}
+      />
 
       {modal.isOpen && <CreateStockPackModal {...modal.modalProps} />}
     </PageContainer>

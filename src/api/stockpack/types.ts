@@ -18,3 +18,48 @@ export type GetSpecificStockPackResponse = {
   data: SpecificStockPack[];
   total: number;
 };
+
+export type GetAnalysisStockPackResponse = {
+  errorCode: string;
+  data: {
+    totalPrice: number;
+    boughtPrice: number;
+    revenue: number;
+    revenuePercentage: number;
+    countStocks: number;
+    riskFreeRate: number;
+    sharpeRatio: number;
+    diversificationLevel: unknown;
+    sumByStock: [
+      {
+        key: string;
+        totalBoughtPrice: number;
+        currentPrice: number;
+        revenue: number;
+        revenuePercentage: number;
+      },
+    ];
+    sumByIndustry: [
+      {
+        key: string;
+        totalBoughtPrice: number;
+        currentPrice: number;
+        revenue: number;
+        revenuePercentage: number;
+      },
+    ];
+    stockDetails: [
+      {
+        ticker: string;
+        name: string;
+        sectorKey: string;
+        industryKey: string;
+        boughtAt: string;
+        boughtPrice: number;
+        currentPrice: number;
+        revenue: number;
+        revenuePercentage: number;
+      },
+    ];
+  };
+};
