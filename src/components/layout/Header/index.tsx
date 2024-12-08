@@ -30,7 +30,10 @@ const Header = () => {
 
   function handleOpenMenu() {
     setIsOpenMenu((prev) => !prev);
-    document.body.classList.toggle('no-scroll');
+
+    if (isDeviceType) {
+      document.body.classList.toggle('no-scroll');
+    }
   }
   return (
     <header

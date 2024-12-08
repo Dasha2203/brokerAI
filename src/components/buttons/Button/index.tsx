@@ -55,7 +55,7 @@ const Button = ({
       ),
       'border-transparent': variant === 'contained' && !uiColor,
       'text-white border-transparent':
-        uiColor === 'primary' && variant === 'contained',
+        (uiColor === 'primary' || uiColor === 'danger') && variant === 'contained',
       'text-violet-700': variant === 'outlined',
     },
   );
@@ -73,10 +73,7 @@ const Button = ({
       ),
     },
     danger: {
-      contained: clsx(
-        'bg-red-600 ring-red-400',
-        'hover:shadow-red-200 hover:bg-red-500',
-      ),
+      contained: clsx('bg-red ring-red', 'hover:opacity-90 transition:opacity'),
       outlined: clsx(
         'border-red-500 text-red-500 ring-red-400',
         'hover:text-white hover:border-red-500 hover:bg-red-500 hover:shadow-red-200',

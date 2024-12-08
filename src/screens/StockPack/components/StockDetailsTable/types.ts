@@ -8,4 +8,5 @@ export type Props = HTMLAttributes<HTMLDivElement> & {
 export type ItemProps = {
   item: SpecificStockPack;
   keys: (keyof SpecificStockPack)[];
+  handleSell: (value: SpecificStockPack) => void;
 };

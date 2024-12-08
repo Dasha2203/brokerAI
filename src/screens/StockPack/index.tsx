@@ -40,6 +40,10 @@ const StockPack = () => {
     }
   }
 
+  function removeTicker(tickerId: string) {
+    // const idx = tickers.findIndex(i => i.)
+  }
+
   useEffect(() => {
     if (!stockPackId || !user) return;
     fetchSpecificStockpack();

@@ -46,7 +46,12 @@ const BuyTickerForm = ({ ticketId }: Props) => {
   useEffect(() => {
     if (list.length) return;
 
-    dispatch(fetchStockPacks({}));
+    dispatch(
+      fetchStockPacks({
+        Offset: 0,
+        limit: 9999,
+      }),
+    );
   }, []);
 
   const formFields: {

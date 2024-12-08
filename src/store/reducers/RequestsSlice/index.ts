@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RemoveRequestCredentials, Request } from './types';
+import { RemoveRequestCredentials, Request, RequestsResponse } from './types';
 
 interface RequestState {
   requests: Request[];
+  total: number;
   error: string;
 }
 const initialState: RequestState = {
   requests: [],
+  total: 0,
   error: '',
 };
 
@@ -14,8 +16,9 @@ export const requestSlice = createSlice({
   name: 'request',
   initialState,
   reducers: {
-    fetchingSuccess(state, action: PayloadAction<Request[]>) {
-      state.requests = action.payload;
+    fetchingSuccess(state, action: PayloadAction<RequestsResponse>) {
+      state.requests = action.payload.data;
+      state.total = action.payload.total;
     },
     remove(state, action: PayloadAction<RemoveRequestCredentials>) {
       const { requestId } = action.payload;

@@ -27,3 +27,15 @@ export type BuyTickerCredentials = {
   price: number;
   count: number;
 };
+
+export type SellTickerCredentials = {
+  boughtTicketInStockPackId: string;
+  stockPackId: string;
+  price: number;
+  ticketId: string;
+};
+
+export type SellTickerResponse = {
+  errorCode: string;
+  data: string;
+};
