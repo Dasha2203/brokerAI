@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import useModal from '@/hooks/useModal';
 import { fetchStockPacks } from '@/store/reducers/UserSlice/actionCreators';
 import CreateStockPackModal from './components/CreateStockPackModal';
+import useUser from '@/hooks/useAuth';
+import useAuth from '@/hooks/useAuth';
 
 const COUNT_VISIBLE = 20;
 
@@ -21,19 +23,21 @@ const StockPacks = () => {
   const { stockpacks } = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const modal = useModal();
+  const user = useAuth();
 
   function handleClick() {
     modal.setIsOpen(true);
   }
 
   useEffect(() => {
+    if (!user) return;
     dispatch(
       fetchStockPacks({
         limit: COUNT_VISIBLE,
         Offset: (page - 1) * COUNT_VISIBLE,
       }),
     );
-  }, [page]);
+  }, [page, user]);
 
   return (
     <PageContainer>

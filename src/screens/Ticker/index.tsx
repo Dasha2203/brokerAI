@@ -14,12 +14,14 @@ import {
   Legend,
 } from 'recharts';
 import BuyTickerForm from './components/BuyTickerForm';
+import useAuth from '@/hooks/useAuth';
 
 const Ticker = () => {
   const params = useParams();
   const [startDate, setStartDate] = useState<Date | undefined>(undefined);
   const [endDate, setEndDate] = useState<Date | undefined>(undefined);
   const [history, setHistory] = useState<TickerHistoryItem[]>([]);
+  const user = useAuth();
   const ticketId = params.id as string;
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const Ticker = () => {
     }
   }, [endDate]);
 
-  if (!ticketId) return null;
+  if (!ticketId || !user) return null;
 
   return (
     <PageContainer>

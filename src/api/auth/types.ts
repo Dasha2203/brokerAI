@@ -1,3 +1,5 @@
+import { IUser } from "@/models/IUser";
+
 export type ErrorCodeResponse = {
   errorCode: string;
 };
@@ -50,4 +52,8 @@ export type RefreshResponse = ErrorCodeResponse & {
     accessTokenExpiration: Date;
     refreshTokenExpiration: Date;
   };
+};
+
+export type UserInfoResponse = ErrorCodeResponse & {
+  data: IUser;
 };

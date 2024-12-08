@@ -11,6 +11,7 @@ import React, { useEffect, useState } from 'react';
 import StockDetailsTable from './components/StockDetailsTable';
 import Pagination from '@/components/Pagination';
 import { IStockPack } from '@/models/IStockPack';
+import useAuth from '@/hooks/useAuth';
 
 const COUNT_VISIBLE = 20;
 
@@ -21,6 +22,7 @@ const StockPack = () => {
   const [page, setPage] = useState(1);
   const params = useParams();
   const stockPackId = params.id as string;
+  const user = useAuth();
 
   async function fetchSpecificStockpack() {
     try {
@@ -39,9 +41,11 @@ const StockPack = () => {
   }
 
   useEffect(() => {
-    if (!stockPackId) return;
+    if (!stockPackId || !user) return;
     fetchSpecificStockpack();
-  }, [stockPackId, page]);
+  }, [stockPackId, page, user]);
+
+  if (!user) return null;
 
   return (
     <PageContainer>

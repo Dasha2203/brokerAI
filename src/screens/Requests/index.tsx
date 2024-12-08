@@ -1,28 +1,28 @@
 'use client';
 import Button from '@/components/buttons/Button';
-import Input from '@/components/forms/Input';
 import Table from '@/components/table/Table';
 import Td from '@/components/table/Td';
 import Th from '@/components/table/Th';
 import Trow from '@/components/table/TRow';
 import PageContainer from '@/components/ui/PageContainer';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import SearchIcon from '@/icons/SearchIcon';
+import useAuth from '@/hooks/useAuth';
 import {
   fetchRequests,
   removeRequest,
 } from '@/store/reducers/RequestsSlice/actionCreators';
-import { RemoveRequestCredentials } from '@/store/reducers/RequestsSlice/types';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Requests = () => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState('');
   const { requests } = useAppSelector((state) => state.requestReducer);
+  const user = useAuth();
 
   useEffect(() => {
+    if (!user) return;
     dispatch(fetchRequests());
-  }, []);
+  }, [user]);
 
   function handleRemove({ requestId }: { requestId: string }) {
     dispatch(removeRequest({ requestId }));
@@ -33,6 +33,8 @@ const Requests = () => {
   //     dispatch(fetchTickers({ TicketName: value }));
   //   }
   // }
+
+  if (!user) return null;
 
   return (
     <PageContainer>

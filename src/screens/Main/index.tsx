@@ -1,13 +1,14 @@
 'use client';
 
 import PageContainer from '@/components/ui/PageContainer';
+import useAuth from '@/hooks/useAuth';
 
 const Main = () => {
+  const user = useAuth();
+
   return (
     <PageContainer>
-      <div
-        className="container max-w-64 bg-slate-400 w-full"
-      >
+      <div className="container max-w-64 bg-slate-400 w-full">
         <div className="table w-full">
           <div className="sticky w-full overflow-x-auto top-0 thead grid grid-cols-[50px_minmax(140px,140fr)_minmax(140px,140fr)_minmax(300px,300fr)] bg-red-300 overflow-x-auto">
             <div className="sticky left-0">id</div>

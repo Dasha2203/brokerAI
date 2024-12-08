@@ -9,15 +9,18 @@ import StockDetailsTable from './components/StockDetailsTable';
 import Info from './components/Info';
 import DifferenceCharts from './components/DifferenceCharts';
 import clsx from 'clsx';
+import useAuth from '@/hooks/useAuth';
 
 const StockPackAnalysis = () => {
   const t = useTranslations('stockpacks');
   const dispatch = useAppDispatch();
   const { analysis } = useAppSelector((state) => state.userReducer.stockpacks);
+  const user = useAuth();
 
   useEffect(() => {
+    if (!user) return;
     dispatch(getAnalysisStockPack());
-  }, []);
+  }, [user]);
 
   const sumByStock = useMemo(
     () =>

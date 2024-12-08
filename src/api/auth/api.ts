@@ -1,4 +1,4 @@
-import { axiosClient } from '@/services/axiosInstance';
+import authAxios, { axiosClient } from '@/services/axiosInstance';
 import {
   ChangePasswordCredentials,
   ErrorCodeResponse,
@@ -7,6 +7,7 @@ import {
   RegistrationCredentials,
   RegistrationResponse,
   ResetPasswordCredentials,
+  UserInfoResponse,
 } from './types';
 
 export const register = async (data: RegistrationCredentials) => {
@@ -50,6 +51,16 @@ export const changePassword = async (data: ChangePasswordCredentials) => {
       '/user/password/reset',
       data,
     );
+
+    return response.data;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
+export const getUserInfo = async () => {
+  try {
+    const response = await authAxios.get<UserInfoResponse>('/user');
 
     return response.data;
   } catch (err: any) {
