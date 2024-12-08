@@ -1,5 +1,7 @@
 export type GetStockPackCredentials = {
   stockPackId: string;
+  Limit?: number;
+  Offset?: number;
 };
 
 export type SpecificStockPack = {

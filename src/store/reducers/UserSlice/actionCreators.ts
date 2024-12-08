@@ -4,6 +4,7 @@ import {
   CreateStockPackCredentials,
   CreateStockPackResponse,
   ErrorCodeResponse,
+  GetAnalysisStockPackResponse,
   RemoveStockPackCredentials,
   StockPackResponse,
   UpdateStockPackCredentials,
@@ -11,7 +12,15 @@ import {
 import { userSlice } from '.';
 
 export const fetchStockPacks =
-  ({ StockPackName, limit, Offset }: { StockPackName?: string; limit?: number, Offset?: number }) =>
+  ({
+    StockPackName,
+    limit,
+    Offset,
+  }: {
+    StockPackName?: string;
+    limit?: number;
+    Offset?: number;
+  }) =>
   async (dispatch: AppDispatch) => {
     try {
       const data = await authAxios.get<StockPackResponse>('/stock-pack', {
@@ -92,6 +101,24 @@ export const updateStockPack =
           stockPackName,
         }),
       );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+export const getAnalysisStockPack =
+  (stockPackId?: string) => async (dispatch: AppDispatch) => {
+    try {
+      const { data } = await authAxios.get<GetAnalysisStockPackResponse>(
+        '/stock-pack/analysis',
+        {
+          params: {
+            stockPackId: stockPackId || null,
+          },
+        },
+      );
+
+      dispatch(userSlice.actions.fetchingAnalysisSuccess(data));
     } catch (err) {
       console.log(err);
     }

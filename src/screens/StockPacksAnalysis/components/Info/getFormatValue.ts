@@ -12,7 +12,14 @@ export function getFormatValue(
   }
 
   if (key === 'revenuePercentage' || key === 'riskFreeRate') {
-    return getFormatNumber({ style: 'percent' }).format(data[key]);
+    return getFormatNumber({
+      style: 'percent',
+      maximumFractionDigits: 3,
+    }).format(data[key]);
+  }
+
+  if (key === 'sharpeRatio') {
+    return getFormatNumber({ maximumFractionDigits: 3 }).format(data[key]);
   }
 
   return data[key];
