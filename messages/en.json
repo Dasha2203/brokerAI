@@ -48,7 +48,8 @@
         "show": "Show bookmarked"
       },
       "showAll": "Show all",
-      "goTo": "Go to {name}"
+      "goTo": "Go to {name}",
+      "search": "Search"
     },
     "sellTicker": "Sell {name}",
     "input": {

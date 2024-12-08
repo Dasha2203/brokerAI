@@ -44,28 +44,20 @@ const TickersTable = () => {
   const { tickers, total } = useAppSelector((state) => state.tickerReducer);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
+  function handleFetchTickers() {
     dispatch(
       fetchTickers({
         Offset: (page - 1) * COUNT_VISIBLE,
         Limit: COUNT_VISIBLE,
         OnlyFavorite: isShowBookmarked,
+        TicketName: value,
       }),
     );
-  }, [page, isShowBookmarked]);
-
-  function handleSubmit(e: KeyboardEvent<HTMLInputElement>) {
-    if (e.key === 'Enter') {
-      dispatch(
-        fetchTickers({
-          TicketName: value,
-          Offset: (page - 1) * COUNT_VISIBLE,
-          Limit: COUNT_VISIBLE,
-          OnlyFavorite: isShowBookmarked,
-        }),
-      );
-    }
   }
+
+  useEffect(() => {
+    handleFetchTickers();
+  }, [page, isShowBookmarked]);
 
   function handleChange(e: string | null) {
     setValue(e || '');
@@ -92,16 +84,25 @@ const TickersTable = () => {
 
   return (
     <div>
-      <div className="my-8 flex flex-col gap-4 md:flex-row">
+      <div className="my-8 flex flex-col items-center gap-4 md:flex-row">
         <Input
           size="lg"
           leftIcon={<SearchIcon className="text-violet-600" />}
           placeholder="Search"
           value={value}
           onChange={handleChange}
-          onKeyDown={handleSubmit}
           className="w-full md:w-auto"
         />
+        <Button
+          as="button"
+          variant="contained"
+          uiColor="primary"
+          className="w-full md:w-fit"
+          fixedSize
+          onClick={handleFetchTickers}
+        >
+          {t('action.search')}
+        </Button>
         <Button
           as="button"
           className="w-full md:w-auto flex justify-center items-center gap-4"
