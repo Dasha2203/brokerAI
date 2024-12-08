@@ -40,7 +40,7 @@ export const fetchStockPack =
       const data = await authAxios.get<StockPackResponse>(
         `/stock-pack/${stockPackId}`,
       );
-      dispatch(userSlice.actions.fetchingSuccess(data.data.data));
+      dispatch(userSlice.actions.fetchingSuccess(data.data));
     } catch (err) {
       console.log(err);
       console.log('fetch tickers error');
