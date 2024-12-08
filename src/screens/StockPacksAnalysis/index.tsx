@@ -52,7 +52,7 @@ const StockPackAnalysis = () => {
   return (
     <PageContainer>
       <Title text={t('analysisTitle')} />
-      <Info />
+      <Info className="mt-8" />
 
       <div className="my-6 grid gap-6 lg:grid-cols-2 lg:gap-10">
         <div

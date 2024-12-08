@@ -1,7 +1,7 @@
 import { useTranslations } from 'next-intl';
 import clsx from 'clsx';
 import { useAppSelector } from '@/hooks/redux';
-import { InfoStockPackKeys } from './types';
+import { InfoStockPackKeys, Props } from './types';
 import { getFormatValue } from './getFormatValue';
 
 const firstKeys: (keyof InfoStockPackKeys)[] = [
@@ -16,7 +16,7 @@ const secondKeys: (keyof InfoStockPackKeys)[] = [
   'sharpeRatio',
 ];
 
-const Info = () => {
+const Info = ({ className }: Props) => {
   const t = useTranslations('stockpacks');
   const {
     stockpacks: { analysis },
@@ -31,6 +31,7 @@ const Info = () => {
         'grid md:gap-20 md:grid-cols-2',
         'bg-white',
         'dark:bg-violet-500',
+        className,
       )}
     >
       <div>

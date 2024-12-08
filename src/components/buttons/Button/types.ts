@@ -10,6 +10,7 @@ export type Props = {
   fixedSize?: boolean;
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  leftIcon?: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 };
 
 export interface ButtonProps

@@ -51,9 +51,13 @@ const Select = <A,>({
   ]);
 
   return (
-    <div>
+    <div
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       {React.cloneElement(control, {
-        // onClick: handleClick,
         ref: refs.setReference,
         ...getReferenceProps(),
       })}

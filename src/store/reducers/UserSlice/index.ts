@@ -5,8 +5,12 @@ import {
   StockPackResponse,
   UpdateStockPackCredentials,
 } from './types';
+import { IUser } from '@/models/IUser';
 
 interface UserSlice {
+  user: {
+    info: IUser | null;
+  };
   stockpacks: {
     list: IStockPack[];
     total: number;
@@ -16,6 +20,9 @@ interface UserSlice {
 }
 
 const initialState: UserSlice = {
+  user: {
+    info: null,
+  },
   stockpacks: {
     list: [],
     analysis: null,

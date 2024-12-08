@@ -1,18 +1,17 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
-import clsx from 'clsx';
 import Button from '@/components/buttons/Button';
 import Pagination from '@/components/Pagination';
 import StockPackCard from '@/components/StockPackCard';
 import PageContainer from '@/components/ui/PageContainer';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
+import useAuth from '@/hooks/useAuth';
 import useModal from '@/hooks/useModal';
 import { fetchStockPacks } from '@/store/reducers/UserSlice/actionCreators';
+import clsx from 'clsx';
+import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import CreateStockPackModal from './components/CreateStockPackModal';
-import useUser from '@/hooks/useAuth';
-import useAuth from '@/hooks/useAuth';
 
 const COUNT_VISIBLE = 20;
 

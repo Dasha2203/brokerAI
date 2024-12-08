@@ -16,7 +16,7 @@ const THead = ({ children, className, style, ...props }: Props) => {
   return (
     <thead
       className={clsx(
-        'sticky top-[400px] z-50 shadow-[0px_2px_0px_0px]',
+        'sticky top-[400px] z-[5] shadow-[0px_2px_0px_0px]',
         // light
         'shadow-[rgba(244,244,244,1)]',
         // dark

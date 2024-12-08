@@ -33,7 +33,7 @@ const keys = [
   'actualPrice',
 ] as (keyof Ticker)[];
 
-const COUNT_VISIBLE = 5;
+const COUNT_VISIBLE = 20;
 
 const TickersTable = () => {
   const t = useTranslations('tickers');

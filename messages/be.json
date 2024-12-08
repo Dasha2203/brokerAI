@@ -8,6 +8,17 @@
   "button": {
     "cancel": "Адмена"
   },
+  "pagination": {
+    "infoShowResult": "Showing <bold>{from}-{to}</bold> from <bold>{total}</bold> data"
+  },
+  "tickers": {
+    "name": "Name",
+    "ticker": "Ticker",
+    "indastry": "Indastry",
+    "sector": "Sector",
+    "price": "Price",
+    "tableCaption": "table's title"
+  },
   "auth": {
     "input": {
       "firstName": {
