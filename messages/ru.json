@@ -8,6 +8,17 @@
   "button": {
     "cancel": "Отмена"
   },
+  "pagination": {
+    "infoShowResult": "Адлюстравана <bold>{from}-{to}</bold> са <bold>{total}</bold> запісаў"
+  },
+  "tickers": {
+    "name": "Название",
+    "ticker": "Тикер",
+    "indastry": "Индастри",
+    "sector": "Сектор",
+    "price": "Цена",
+    "tableCaption": "table's title"
+  },
   "auth": {
     "input": {
       "firstName": {

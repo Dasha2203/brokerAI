@@ -51,9 +51,13 @@ const Select = <A,>({
   ]);
 
   return (
-    <div>
+    <div
+      onClick={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      }}
+    >
       {React.cloneElement(control, {
-        // onClick: handleClick,
         ref: refs.setReference,
         ...getReferenceProps(),
       })}
@@ -78,7 +82,7 @@ const Select = <A,>({
                     <Item
                       key={idx}
                       onClick={() => onChange(item)}
-                      active={isActive(item)}
+                      active={isActive ? isActive(item) : false}
                       value={''}
                     >
                       {optionAs(item)}
@@ -103,7 +107,7 @@ const Select = <A,>({
               <Item
                 key={idx}
                 onClick={() => onChange(item)}
-                active={isActive(item)}
+                active={isActive ? isActive(item) : false}
                 value={''}
               >
                 {optionAs(item)}

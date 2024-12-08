@@ -6,7 +6,7 @@ import clsx from 'clsx';
 const PageContainer = ({ className, style, children }: Props) => {
   return (
     <LayoutContainer
-      className={clsx('pt-[92px] md:pt-[138px]', className)}
+      className={clsx('pt-30 md:pt-40 pb-20', className)}
       style={style}
     >
       {children}

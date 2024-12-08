@@ -8,6 +8,78 @@
   "button": {
     "cancel": "Cancel"
   },
+  "pagination": {
+    "infoShowResult": "Showing <bold>{from}-{to}</bold> from <bold>{total}</bold> data"
+  },
+  "navigation": {
+    "tickers": "Tickers",
+    "stockpacks": "Stockpacks",
+    "requests": "Requests"
+  },
+  "tickers": {
+    "tickersTitle": "Tickers",
+    "name": "Name",
+    "ticker": "Ticker",
+    "industryKey": "Indastry",
+    "sectorKey": "Sector",
+    "actualPrice": "Price",
+    "tableCaption": "table's title",
+    "shortInfo": "Short information about tickers",
+    "action": {
+      "bookmark": {
+        "remove": "Remove from bookmark",
+        "add": "Add to bookmark",
+        "show": "Show bookmarked"
+      },
+      "showAll": "Show all",
+      "goTo": "Go to {name}"
+    }
+  },
+  "stockpacks": {
+    "stockpacksTitle": "Invest portfolio",
+    "analysisTitle": "Investment portfolio analysis",
+    "create": "Create invest portfolio",
+    "edit": "Edit {name}",
+    "color": "Color",
+    "portfolioName": "Porfolio name",
+    "totalStockPacks": "Total stockpacks",
+    "assetWeight": "Asset weights",
+    "industryWeight": "Industry weights",
+    "detailsStock": "Details stockpack",
+    "input": {
+      "name": {
+        "label": "Porfolio name",
+        "placeholder": "Name"
+      },
+      "color": {
+        "label": "Select color"
+      }
+    },
+    "button": {
+      "create": "Create",
+      "cancel": "Cancel",
+      "remove": "Remove",
+      "edit": "Edit",
+      "chooseAction":"Select an action",
+      "createNewStockPack": "Create new stockpack",
+      "showAnalysis": "Show analisys"
+    },
+    "label": {
+      "name": "Name",
+      "ticker": "Ticker",
+      "sectorKey": "Sector",
+      "industryKey": "Indastry",
+      "revenue": "Revenue",
+      "revenuePercentage": "Revenue, %",
+      "boughtPrice": "Bought price",
+      "currentPrice": "Actual price",
+      "totalPrice": "Total price",
+      "riskFreeRate": "Risk free rate",
+      "sharpeRatio": "Sharpe ratio",
+      "actualPrice": "Actual price",
+      "boughtAt": "Bought"
+    }
+  },
   "auth": {
     "input": {
       "firstName": {

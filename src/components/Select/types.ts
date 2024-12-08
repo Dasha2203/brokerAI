@@ -4,5 +4,5 @@ export type Props<A> = {
   control: React.ReactElement;
   onChange: (value: A) => void;
   optionAs: (value: A) => React.ReactNode;
-  isActive: (value: A) => boolean;
+  isActive?: (value: A) => boolean;
 };

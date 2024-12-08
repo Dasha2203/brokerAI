@@ -12,6 +12,7 @@ import RequestResetPasswrodModal from '@/screens/auth/components/RequestResetPas
 import Link from '@/components/Link';
 import { login } from '@/api/auth';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 const minCountPass = 6;
 
@@ -20,6 +21,8 @@ const LoginForm = () => {
   const tCommonError = useTranslations('error');
   const [error, setError] = useState('');
   const tAuth = useTranslations('auth');
+  const router = useRouter();
+
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
     useForm<FormValues>({
       initialValues: {
@@ -36,6 +39,7 @@ const LoginForm = () => {
           .required(tError('required')),
       }),
       onSubmit: async (values) => {
+        ('use server');
         setError('');
         const { email, password } = values;
 
@@ -67,6 +71,18 @@ const LoginForm = () => {
               'refreshTokenExpiration',
               refreshTokenExpiration.toString(),
             );
+            router.push('/');
+            // cookies().set('accessToken', accessToken);
+            // Cookies.set('accessToken', accessToken);
+            // Cookies.set('refreshToken', refreshToken);
+            // Cookies.set(
+            //   'accessTokenExpiration',
+            //   accessTokenExpiration.toString(),
+            // );
+            // Cookies.set(
+            //   'refreshTokenExpiration',
+            //   refreshTokenExpiration.toString(),
+            // );
           }
         } catch (err) {
           console.log(err);

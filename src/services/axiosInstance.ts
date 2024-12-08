@@ -1,7 +1,7 @@
 import { RefreshResponse } from '@/api/auth';
 import axios from 'axios';
 
-const baseURL = 'http://195.133.197.163:5000/api/';
+const baseURL = 'http://213.148.11.27:5000/api/';
 
 export const axiosClient = axios.create({
   baseURL,
@@ -14,7 +14,7 @@ const authAxios = axios.create({
 async function refreshAccessToken() {
   const refreshToken = localStorage.getItem('refreshToken');
   try {
-    const { data } = await authAxios.post<RefreshResponse>('/auth/refresh', {
+    const { data } = await axiosClient.post<RefreshResponse>('/auth/refresh', {
       refreshToken,
     });
 
@@ -44,6 +44,7 @@ async function refreshAccessToken() {
     throw error;
   }
   return null;
+  // return null;
 }
 
 authAxios.interceptors.request.use(
@@ -57,6 +58,7 @@ authAxios.interceptors.request.use(
     const now = new Date();
 
     if (accessToken && now < accessTokenExpirationDate) {
+      console.log(`access token: ` + accessToken)
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     } else {
       // Если accessToken истёк, обновляем его
@@ -65,6 +67,8 @@ authAxios.interceptors.request.use(
         config.headers['Authorization'] = `Bearer ${newAccessToken}`;
       }
     }
+    console.log('interceptor request: ' + accessToken);
+    console.log('headers: ' + config.headers);
 
     return config;
   },
@@ -72,25 +76,25 @@ authAxios.interceptors.request.use(
 );
 
 // Перехватчик ответов: обрабатывает ошибку 401 и пытается обновить токен
-authAxios.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
+// authAxios.interceptors.response.use(
+//   (response) => response,
+//   async (error) => {
+//     const originalRequest = error.config;
 
-    // Проверяем, если ошибка 401 и это не повторный запрос на обновление токена
-    if (error.response?.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
+//     // Проверяем, если ошибка 401 и это не повторный запрос на обновление токена
+//     if (error.response?.status === 401 && !originalRequest._retry) {
+//       originalRequest._retry = true;
 
-      // Пробуем обновить токен
-      const newAccessToken = await refreshAccessToken();
-      if (newAccessToken) {
-        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-        return authAxios(originalRequest); // Повторяем запрос с новым токеном
-      }
-    }
+//       // Пробуем обновить токен
+//       const newAccessToken = await refreshAccessToken();
+//       if (newAccessToken) {
+//         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+//         return authAxios(originalRequest); // Повторяем запрос с новым токеном
+//       }
+//     }
 
-    return Promise.reject(error);
-  },
-);
+//     return Promise.reject(error);
+//   },
+// );
 
 export default authAxios;

@@ -10,6 +10,7 @@ import { FormValues } from './types';
 import { register } from '@/api/auth';
 import Link from '@/components/Link';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 const formFields: {
   label: string;
@@ -51,6 +52,7 @@ const RegisterForm = () => {
   const tError = useTranslations('auth.error');
   const tCommonError = useTranslations('error');
   const [error, setError] = useState('');
+  const router = useRouter();
   const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting, setErrors } =
     useForm<FormValues>({
       initialValues: {
@@ -120,6 +122,7 @@ const RegisterForm = () => {
             'refreshTokenExpiration',
             refreshTokenExpiration.toString(),
           );
+          router.push('/');
         } catch (err) {
           console.log(err);
           setError(tCommonError('wrong'));

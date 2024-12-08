@@ -13,10 +13,11 @@ import LoadingIcon from '@/icons/LoadingIcon';
 const Button = ({
   as,
   uiColor,
-  variant,
+  variant = 'outlined',
   size = 'md',
   isLoading = false,
   fixedSize = false,
+  leftIcon: LeftIcon,
   ...props
 }: CustomButtonProps) => {
   const commonStyles = clsx(
@@ -46,9 +47,17 @@ const Button = ({
     //     : size === 'base'
 
     'text-lg',
-    'text-center transition-all duration-500 font-bold',
-    'rounded-xl py-1.5 px-2.5 md:py-3 md:px-5 border-2 shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12)]',
-    variant === 'contained' && 'border-transparent text-white',
+    'flex justify-center text-center transition-all duration-500 font-bold',
+    'rounded-[14px] py-1.5 px-2.5 md:py-3 md:px-5 border-2',
+    {
+      'shadow-[0px_4px_8px_0px_rgba(0,0,0,0.12)]': !(
+        variant === 'contained' && !uiColor
+      ),
+      'border-transparent': variant === 'contained' && !uiColor,
+      'text-white border-transparent':
+        uiColor === 'primary' && variant === 'contained',
+      'text-violet-700': variant === 'outlined',
+    },
   );
 
   const colorsScheme: {
@@ -131,20 +140,24 @@ const Button = ({
 
         className,
         {
-          'bg-gray-300 text-white cursor-default':
+          '!bg-gray-300 !text-white !cursor-default':
             disabled && variant === 'contained',
-          'border-gray-300 text-gray-300 cursor-default':
+          '!border-gray-300 !text-gray-300 !cursor-default':
             disabled && variant === 'outlined',
           'hover:shadow-lg active:ring': !disabled,
         },
       )}
       type={type}
+      disabled={disabled}
       {...rest}
     >
       {isLoading ? (
         <LoadingIcon className="w-8 h-8 animate-spin mx-auto" />
       ) : (
-        children
+        <>
+          {LeftIcon && <LeftIcon className="w-7 h-7" />}
+          {children}
+        </>
       )}
     </button>
   );

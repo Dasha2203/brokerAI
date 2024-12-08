@@ -32,6 +32,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 'md:rounded-2xl w-fit',
               )}
               ref={ref}
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 className={clsx(
