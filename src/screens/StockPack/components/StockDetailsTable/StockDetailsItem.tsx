@@ -3,8 +3,9 @@ import clsx from 'clsx';
 import Item from '@/components/table/Item';
 import { getFormatValue } from './getFormatValue';
 import { ItemProps } from './types';
+import Button from '@/components/buttons/Button';
 
-const StockDetailsItem = ({ item, keys }: ItemProps) => {
+const StockDetailsItem = ({ item, keys, handleSell }: ItemProps) => {
   const t = useTranslations('stockpacks');
 
   return (
@@ -28,6 +29,17 @@ const StockDetailsItem = ({ item, keys }: ItemProps) => {
               <span>{getFormatValue(item, key)}</span>
             </li>
           ))}
+        <div className="mt-9 flex flex-col gap-3">
+          <Button
+            as="button"
+            variant="contained"
+            uiColor="danger"
+            className="w-full"
+            onClick={() => handleSell(item)}
+          >
+            {t('button.sell')}
+          </Button>
+        </div>
       </ul>
     </Item>
   );

@@ -6,6 +6,7 @@ export type GetStockPackCredentials = {
 
 export type SpecificStockPack = {
   stockId: string;
+  boughtStockId: string;
   boughtAt: string;
   boughtPrice: number;
   ticker: string;

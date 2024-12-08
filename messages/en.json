@@ -33,7 +33,15 @@
       },
       "showAll": "Show all",
       "goTo": "Go to {name}"
-    }
+    },
+    "sellTicker": "Sell {name}",
+    "input": {
+      "price": {
+        "label": "Input price",
+        "placeholder": "$1"
+      }
+    },
+    "sell": "Sell"
   },
   "stockpacks": {
     "stockpacksTitle": "Invest portfolio",
@@ -62,7 +70,9 @@
       "edit": "Edit",
       "chooseAction":"Select an action",
       "createNewStockPack": "Create new stockpack",
-      "showAnalysis": "Show analisys"
+      "showAnalysis": "Show analisys",
+      "sell": "Sell"
+
     },
     "label": {
       "name": "Name",

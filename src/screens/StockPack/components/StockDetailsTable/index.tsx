@@ -10,6 +10,10 @@ import { getFormatValue } from './getFormatValue';
 import StockDetailsItem from './StockDetailsItem';
 import { Props } from './types';
 import { SpecificStockPack } from '@/api/stockpack';
+import Button from '@/components/buttons/Button';
+import { useState } from 'react';
+import SellTicketModal from '../SellTicketModal';
+import useModal from '@/hooks/useModal';
 
 const keys = [
   'name',
@@ -23,6 +27,13 @@ const keys = [
 
 const StockDetailsTable = ({ items, className }: Props) => {
   const t = useTranslations('stockpacks');
+  const [sellTicker, setSellTicker] = useState<SpecificStockPack | null>(null);
+  const modal = useModal();
+
+  function handleSell(value: SpecificStockPack) {
+    modal.setIsOpen(true);
+    setSellTicker(value);
+  }
 
   return (
     <div className={className}>
@@ -33,6 +44,7 @@ const StockDetailsTable = ({ items, className }: Props) => {
               {keys.map((key) => (
                 <Th key={key}>{t(`label.${key}`)}</Th>
               ))}
+              <Th />
             </THeadRow>
           </THead>
           <TBody>
@@ -41,14 +53,30 @@ const StockDetailsTable = ({ items, className }: Props) => {
                 {keys.map((key) => (
                   <Td>{getFormatValue(item, key)}</Td>
                 ))}
+                <Td>
+                  <Button
+                    as="button"
+                    variant="contained"
+                    uiColor="danger"
+                    className="w-full"
+                    onClick={() => handleSell(item)}
+                  >
+                    {t('button.sell')}
+                  </Button>
+                </Td>
               </Trow>
             ))}
           </TBody>
         </Table>
       </div>
       <div className="md:hidden">
-        {items?.map((item) => <StockDetailsItem item={item} keys={keys} />)}
+        {items?.map((item) => (
+          <StockDetailsItem item={item} keys={keys} handleSell={handleSell} />
+        ))}
       </div>
+      {modal.isOpen && sellTicker && (
+        <SellTicketModal {...modal.modalProps} item={sellTicker} />
+      )}
     </div>
   );
 };
