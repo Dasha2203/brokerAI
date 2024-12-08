@@ -16,6 +16,22 @@
     "stockpacks": "Stockpacks",
     "requests": "Requests"
   },
+  "requests": {
+    "title": "Requests List",
+    "caption": "List of the applications you have created",
+    "action": {
+      "cancel": "Cancel",
+      "search": "Search"
+    },
+    "Sell": "Sell",
+    "Buy": "Buy",
+    "label": {
+      "type": "Type",
+      "ticker": "Ticker",
+      "price": "Price",
+      "dateCreated": "Date created"
+    }
+  },
   "tickers": {
     "tickersTitle": "Tickers",
     "name": "Name",
@@ -150,5 +166,6 @@
   "success": {
     "checkEmail": "Check your email",
     "sendedCode": "We sended code to your email"
-  }
+  },
+  "noData": "There's no information here yet"
 }

@@ -38,9 +38,8 @@ export const buyTicker = async ({
 }: BuyTickerCredentials) => {
   try {
     const { data } = await authAxios.post<BuyTickerResponse>(
-      `/ticket/request/${ticketId}/${stockPackId}/buy`,
+      `/ticket/request/${ticketId}/${stockPackId}/buy?price=${price}`,
       {
-        price,
         count,
       },
     );
