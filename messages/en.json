@@ -74,6 +74,22 @@
     },
     "sell": "Sell"
   },
+  "profile": {
+    "myProfile": "My profile",
+    "label": {
+      "name": "Name",
+      "lastName": "Last name",
+      "email": "Email",
+      "country": "Country",
+      "2FA": "2FA",
+      "language": "Language",
+      "stripe": "Stripe"
+    },
+    "connected": "Connected",
+    "notConnected": "Not connected",
+    "verified": "Verified",
+    "notVerified": "Not verified"
+  },
   "stockpacks": {
     "stockpacksTitle": "Invest portfolio",
     "analysisTitle": "Investment portfolio analysis",

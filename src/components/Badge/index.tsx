@@ -1,13 +1,19 @@
 import clsx from 'clsx';
 import { Props } from './types';
 
-const Badge = ({ text, color }: Props) => {
+const Badge = ({ text, color, className, size = 'base' }: Props) => {
   return (
     <div
-      className={clsx('rounded-[14px] w-fit py-3 px-5 text-base font-bold', {
-        'bg-[#D8FFE0] text-green': color === 'green',
-        'bg-[#ff969d] text-red': color === 'red',
-      })}
+      className={clsx(
+        'rounded-[14px] w-fit  font-bold',
+        {
+          'bg-[#D8FFE0] text-green': color === 'green',
+          'bg-[#ff969d] text-red': color === 'red',
+          'py-3 px-5 text-base': size === 'base',
+          'py-1 px-2 text-xs': size === 'xs',
+        },
+        className,
+      )}
     >
       {text}
     </div>
