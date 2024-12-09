@@ -18,3 +18,12 @@ export type BillinInfo = {
 export type BillingInfoResponse = ErrorCodeResponse & {
   data: BillinInfo;
 };
+export type Session = {
+  sessionId: string;
+  deviceFingerprint: string;
+  deviceIp: string;
+};
+
+export type SessionsResponse = ErrorCodeResponse & {
+  data: Session[];
+};

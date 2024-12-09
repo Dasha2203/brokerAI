@@ -6,6 +6,7 @@ import useAuth from '@/hooks/useAuth';
 import UserInfo from './components/UserInfo';
 import { useEffect, useState } from 'react';
 import { BillinInfo, getBillingInfo } from '@/api/user';
+import Sessions from './components/Sessions';
 
 const Profile = () => {
   const user = useAuth();
@@ -29,6 +30,7 @@ const Profile = () => {
   return (
     <PageContainer>
       <UserInfo user={user} billingInfo={billingInfo} className="w-1/2" />
+      <Sessions className="w-1/3" />
     </PageContainer>
   );
 };

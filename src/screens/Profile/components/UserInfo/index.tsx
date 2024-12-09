@@ -1,12 +1,10 @@
+import Badge from '@/components/Badge';
 import Title from '@/components/Title';
 import Box from '@/components/ui/Box';
-import { Props } from './types';
-import Badge from '@/components/Badge';
-import Button from '@/components/buttons/Button';
-import { useEffect, useMemo } from 'react';
-import StripePricingTable from '../StripePricingTable';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
+import { useMemo } from 'react';
+import { Props } from './types';
 
 const UserInfo = ({ user, billingInfo, className }: Props) => {
   const t = useTranslations('profile');
