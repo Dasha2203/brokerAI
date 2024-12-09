@@ -14,10 +14,6 @@ const RequestItem = ({ item, onRemove }: RequestItemProps) => {
   const list = useMemo(
     () => [
       {
-        label: t('label.type'),
-        value: item.requestType,
-      },
-      {
         label: t('label.ticker'),
         value: item.tickerName,
       },

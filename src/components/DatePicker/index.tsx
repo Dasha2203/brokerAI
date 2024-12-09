@@ -22,11 +22,12 @@ const CustomDateRangePicker = ({
   ]);
 
   const CustomDateInput = forwardRef<HTMLButtonElement, CustomDateInputProps>(
-    ({ value, onClick }, ref) => (
+    ({ value, onClick, className }, ref) => (
       <CustomInput
         placeholder={value || 'Select Date Range'}
         onClick={onClick}
         ref={ref as React.Ref<HTMLDivElement>}
+        className={className}
       />
     ),
   );
@@ -54,7 +55,8 @@ const CustomDateRangePicker = ({
         setDateRange(update);
       }}
       calendarStartDay={1}
-      customInput={<CustomDateInput />}
+      customInput={<CustomDateInput className="text-sm w-full" />}
+      className="w-full"
     />
   );
 };

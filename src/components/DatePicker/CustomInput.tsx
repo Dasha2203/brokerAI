@@ -3,7 +3,12 @@ import React from 'react';
 import Input from '../forms/Input';
 import { CustomInputProps } from './types';
 
-const CustomInput = ({ placeholder, onClick, ref }: CustomInputProps) => {
+const CustomInput = ({
+  placeholder,
+  onClick,
+  className,
+  ref,
+}: CustomInputProps) => {
   function onClickHandler(event: React.MouseEvent<HTMLElement>) {
     onClick && onClick(event);
   }
@@ -13,6 +18,7 @@ const CustomInput = ({ placeholder, onClick, ref }: CustomInputProps) => {
       value={placeholder}
       onClick={(e) => onClickHandler(e)}
       onChange={() => {}}
+      className={className}
     />
   );
 };

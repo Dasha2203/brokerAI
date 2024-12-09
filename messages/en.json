@@ -36,11 +36,22 @@
     "tickersTitle": "Tickers",
     "name": "Name",
     "ticker": "Ticker",
+    "infoAbout": "{name} information",
     "industryKey": "Indastry",
     "sectorKey": "Sector",
     "actualPrice": "Price",
     "tableCaption": "table's title",
     "shortInfo": "Short information about tickers",
+    "price": "Price",
+    "buyTicker": "Buy {name}",
+    "label": {
+      "price": "Price",
+      "count": "Count",
+      "ticker": "Ticker",
+      "sectorKey": "Sector",
+      "industryKey": "Indastry",
+      "actualPrice": "Actual price"
+    },
     "action": {
       "bookmark": {
         "remove": "Remove from bookmark",
@@ -49,7 +60,10 @@
       },
       "showAll": "Show all",
       "goTo": "Go to {name}",
-      "search": "Search"
+      "search": "Search",
+      "buy": "Buy",
+      "selectStockpack": "Select stockPack",
+      "resetDate": "Reset date"
     },
     "sellTicker": "Sell {name}",
     "input": {

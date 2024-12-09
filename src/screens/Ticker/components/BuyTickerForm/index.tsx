@@ -11,38 +11,51 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { fetchStockPacks } from '@/store/reducers/UserSlice/actionCreators';
 import { IStockPack } from '@/models/IStockPack';
 import { buyTicker } from '@/api/ticker';
+import { REGEX_NUMBER } from '@/const';
+import clsx from 'clsx';
+import { useErrorBoundary } from 'react-error-boundary';
 
-const BuyTickerForm = ({ ticketId }: Props) => {
+const BuyTickerForm = ({ ticketId, className, onSubmit }: Props) => {
+  const t = useTranslations('tickers');
+  const tCommon = useTranslations();
   const tError = useTranslations('auth.error');
   const dispatch = useAppDispatch();
+  const { showBoundary } = useErrorBoundary();
   const [stockPack, setStockPack] = useState<IStockPack | null>(null);
   const { list } = useAppSelector((state) => state.userReducer.stockpacks);
-  const { getFieldProps, getFieldMeta, handleSubmit, isSubmitting } =
-    useForm<FormValues>({
-      initialValues: {
-        count: '',
-        price: '',
-      },
-      validationSchema: Yup.object({
-        count: Yup.number().required(tError('required')),
-        price: Yup.number().required(tError('required')),
-      }),
-      onSubmit: async (values) => {
-        if (!stockPack) return;
-        const { count, price } = values;
+  const {
+    getFieldProps,
+    getFieldMeta,
+    handleSubmit,
+    setFieldValue,
+    isSubmitting,
+  } = useForm<FormValues>({
+    initialValues: {
+      count: '',
+      price: '',
+    },
+    validationSchema: Yup.object({
+      count: Yup.number().required(tError('required')),
+      price: Yup.number().required(tError('required')),
+    }),
+    onSubmit: async (values) => {
+      if (!stockPack) return;
+      const { count, price } = values;
 
-        try {
-          const res = await buyTicker({
-            ticketId,
-            count: +count,
-            price: +price,
-            stockPackId: stockPack.stockPackId,
-          });
-        } catch (err) {
-          console.log(err);
-        }
-      },
-    });
+      try {
+        await buyTicker({
+          ticketId,
+          count: +count,
+          price: +price,
+          stockPackId: stockPack.stockPackId,
+        });
+        onSubmit();
+      } catch (err) {
+        console.log(err);
+        showBoundary({ message: tCommon('error.wrong') });
+      }
+    },
+  });
   useEffect(() => {
     if (list.length) return;
 
@@ -63,12 +76,12 @@ const BuyTickerForm = ({ ticketId }: Props) => {
   }[] = useMemo(
     () => [
       {
-        label: 'price',
+        label: t('label.price'),
         field: 'price',
         component: Input,
       },
       {
-        label: 'count',
+        label: t('label.count'),
         field: 'count',
         component: Input,
       },
@@ -80,9 +93,29 @@ const BuyTickerForm = ({ ticketId }: Props) => {
     setStockPack(value);
   }
 
+  const handleChangePrice = (value: string | null) => {
+    if (value && REGEX_NUMBER.test(value)) {
+      setFieldValue('price', value);
+    }
+
+    if (!value) {
+      setFieldValue('price', '');
+    }
+  };
+
+  const handleChangeCount = (value: string | null) => {
+    if (value && REGEX_NUMBER.test(value)) {
+      setFieldValue('count', value);
+    }
+
+    if (!value) {
+      setFieldValue('count', '');
+    }
+  };
+
   return (
     <form
-      className="flex flex-col gap-7"
+      className={clsx('flex flex-col gap-7', className)}
       onSubmit={(e) => {
         if (isSubmitting) {
           return;
@@ -90,27 +123,16 @@ const BuyTickerForm = ({ ticketId }: Props) => {
         handleSubmit(e);
       }}
     >
-      {formFields.map(({ field, component: Field, label, rightNode }, idx) => (
-        <FormField
-          label={label}
-          rightNode={rightNode}
-          key={idx}
-          {...getFieldMeta(field)}
-        >
-          <Field
-            className={'w-full'}
-            placeholder={label}
-            type="number"
-            {...getFieldProps(field)}
-          />
-        </FormField>
-      ))}
       <FormField label="StockPack">
         <Select
-          title={'title'}
+          title={t('action.selectStockpack')}
           control={
             <div>
-              {stockPack ? stockPack.stockPackName : 'Select stockPack'}
+              <Button as="button" className="w-full relative">
+                {stockPack
+                  ? stockPack.stockPackName
+                  : t('action.selectStockpack')}
+              </Button>
             </div>
           }
           options={list}
@@ -119,15 +141,36 @@ const BuyTickerForm = ({ ticketId }: Props) => {
           isActive={(value) => value.stockPackId === stockPack?.stockPackId}
         />
       </FormField>
+      {formFields.map(({ field, component: Field, label, rightNode }, idx) => (
+        <FormField
+          label={label}
+          rightNode={rightNode}
+          key={idx}
+          {...getFieldMeta(field)}
+        >
+          <Field
+            {...getFieldProps(field)}
+            onChange={field === 'price' ? handleChangePrice : handleChangeCount}
+            className={'w-full'}
+            placeholder={label}
+          />
+        </FormField>
+      ))}
       <Button
         as="button"
         uiColor="primary"
         variant="contained"
         fixedSize
-        className="w-full"
+        className="w-full mt-auto"
         type="submit"
+        isLoading={isSubmitting}
+        disabled={
+          !getFieldMeta('count').value ||
+          !getFieldMeta('price').value ||
+          !stockPack
+        }
       >
-        Buy
+        {t('action.buy')}
       </Button>
     </form>
   );

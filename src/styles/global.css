@@ -44,6 +44,10 @@ input[type="password"] {
   /* @apply bg-gray-1700; */
 }
 
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
 @media (min-width: 1024px) {
   :root {
     --layoutHeaderHeight: 64px;
@@ -102,8 +106,9 @@ input[type="password"] {
 }
 
 @layer base {
-  body {
-    /* @apply text-gray-1900; */
+  .box {
+    @apply p-7 rounded-[14px];
+    @apply bg-white dark:bg-violet-500;
   }
 }
 
