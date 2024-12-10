@@ -1,4 +1,4 @@
-import { IUser } from "@/models/IUser";
+import { IUser } from '@/models/IUser';
 
 export type ErrorCodeResponse = {
   errorCode: string;
@@ -57,3 +57,12 @@ export type RefreshResponse = ErrorCodeResponse & {
 export type UserInfoResponse = ErrorCodeResponse & {
   data: IUser;
 };
+
+export type AddOtpResponse = ErrorCodeResponse & {
+  data: {
+    otpUrl: string;
+    otpResetKey: string;
+  };
+};
+
+export type ConfirmOtpResponse = ErrorCodeResponse;

@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { ModalProps } from './types';
 
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ header, children, context, ...props }, ref) => {
+  ({ header, children, context, className, ...props }, ref) => {
     return (
       <FloatingPortal>
         <FloatingOverlay
@@ -29,7 +29,8 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                 'px-4 py-5 xs:px-5 xs:py-6 md:px-[50px] md:pt-[40px] md:pb-[55px]',
                 'flex flex-col',
                 'h-full w-full md:w-auto md:h-auto md:min-w-[552px]',
-                'md:rounded-2xl w-fit',
+                'md:rounded-2xl w-fit md:max-h-[90vh]',
+                className,
               )}
               ref={ref}
               onClick={(e) => e.stopPropagation()}
@@ -49,7 +50,7 @@ const Modal = forwardRef<HTMLDivElement, ModalProps>(
                   {header}
                 </div>
               )}
-              <div className="pt-8 flex flex-col flex-1">{children}</div>
+              <div className="pt-8 flex flex-col flex-1 overflow-y-auto">{children}</div>
             </div>
           </FloatingFocusManager>
         </FloatingOverlay>

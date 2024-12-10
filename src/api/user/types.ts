@@ -27,3 +27,34 @@ export type Session = {
 export type SessionsResponse = ErrorCodeResponse & {
   data: Session[];
 };
+
+export type Limits = {
+  funds: number;
+  currentCountStockPacks: number;
+  maxCountStockPacks: number;
+  subscriptionName: string;
+  currentPeriodEnd: string;
+  activeSubscription: boolean;
+};
+
+export type LimitationsResponse = ErrorCodeResponse & {
+  data: Limits;
+};
+
+export type Transaction = {
+  transactionId: string;
+  value: number;
+  fee: number;
+  explanationKey: string;
+  createdAt: string;
+};
+
+export type TransactionsResponse = ErrorCodeResponse & {
+  data: Transaction[];
+  total: number;
+};
+
+export type TopUpResponse = ErrorCodeResponse & {
+  data: string;
+  total: number;
+};

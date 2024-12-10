@@ -7,10 +7,12 @@ import UserInfo from './components/UserInfo';
 import { useEffect, useState } from 'react';
 import { BillinInfo, getBillingInfo } from '@/api/user';
 import Sessions from './components/Sessions';
+import ActionsPanel from './components/ActionsPanel';
+import Limitations from './components/Limitations';
 
 const Profile = () => {
   const user = useAuth();
-  const [billingInfo, setBillingInfo] = useState<BillinInfo | null>();
+  const [billingInfo, setBillingInfo] = useState<BillinInfo | null>(null);
 
   async function fetchBillingIfo() {
     try {
@@ -29,8 +31,14 @@ const Profile = () => {
 
   return (
     <PageContainer>
-      <UserInfo user={user} billingInfo={billingInfo} className="w-1/2" />
-      <Sessions className="w-1/3" />
+      <div className="grid grid-cols-[2fr_1fr] gap-8">
+        <UserInfo user={user} billingInfo={billingInfo} />
+        <Limitations />
+      </div>
+      <div className="mt-8 grid grid-cols-[1fr_2fr] gap-8">
+        <Sessions />
+        <ActionsPanel user={user} billingInfo={billingInfo} />
+      </div>
     </PageContainer>
   );
 };

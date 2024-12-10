@@ -11,6 +11,16 @@
   "pagination": {
     "infoShowResult": "Showing <bold>{from}-{to}</bold> from <bold>{total}</bold> data"
   },
+  "otp": {
+    "title": "Add OTP",
+    "warning": "Make sure you keep the key",
+    "enterCode": "Please enter code",
+    "action": {
+      "confirm": "Confirm"
+    },
+    "resetTitle": "Reset OTP",
+    "confirmTitle": "Confirm OTP"
+  },
   "navigation": {
     "tickers": "Tickers",
     "stockpacks": "Stockpacks",
@@ -83,15 +93,51 @@
       "country": "Country",
       "2FA": "2FA",
       "language": "Language",
-      "stripe": "Stripe"
+      "stripe": "Stripe",
+      "password": "Password",
+      "funds": "Total funds",
+      "transactions": "Transactions",
+      "currentCountStockPacks": "Count stockpacks",
+      "maxCountStockPacks": "Max number of stockpacks",
+      "subscriptionName": "Subscription",
+      "currentPeriodEnd": "Period end",
+      "activeSubscription": "Active subscription",
+      "createdAt": "Date",
+      "fee": "Fee",
+      "value": "Amount",
+      "explanationKey": "Type of operation",
+      "amount": "Amount"
     },
+    "historyTransactions": "History of transactions",
+    "active": "Active",
+    "notActive": "Not active",
     "connected": "Connected",
     "notConnected": "Not connected",
     "verified": "Verified",
     "notVerified": "Not verified",
     "lastSessions": "Last sessions",
+    "actions": "Actions",
+    "subscription": "Subscription",
+    "limits": "Limits",
+    "transactions": {
+      "ReserveToBuyTicket": "Reserve to buy ticket",
+      "Refund": "Refund",
+      "AddFunds": "Account replenishment",
+      "SellTicket": "Ticker sale"
+    },
     "action": {
-      "revoke": "Revoke"
+      "revoke": "Revoke",
+      "restore": "Restore",
+      "connectStripe": "Connect stripe",
+      "manageStripe": "Manage",
+      "manageSubscription": "Subscription",
+      "show": "Show",
+      "topUp": "Top up",
+      "payOut": "Payout",
+      "addOtp": "Add otp",
+      "remove": "Remove",
+      "reset": "Reset",
+      "verify": "Verify"
     }
   },
   "stockpacks": {
@@ -178,6 +224,7 @@
       },
       "required": "Required"
     },
+    "emailVerified": "Mail successfully confirmed",
     "resetPassword": "Reset password",
     "button": {
       "changePassword": "Change password",
@@ -196,7 +243,8 @@
     }
   },
   "error": {
-    "wrong": "Something went wrong"
+    "wrong": "Something went wrong",
+    "IncorrectOtp": "Incorrect OTP"
   },
   "success": {
     "checkEmail": "Check your email",

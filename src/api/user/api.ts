@@ -1,7 +1,11 @@
 import authAxios, { axiosClient } from '@/services/axiosInstance';
 import {
   BillingInfoResponse,
+  ErrorCodeResponse,
+  LimitationsResponse,
   SessionsResponse,
+  TopUpResponse,
+  TransactionsResponse,
   UserInfoResponse,
 } from './types';
 
@@ -46,6 +50,71 @@ export const removeSession = async ({ sessionId }: { sessionId: string }) => {
     );
 
     return true;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
+export const getLimitations = async () => {
+  try {
+    const { data } =
+      await authAxios.get<LimitationsResponse>('/user/limitations');
+
+    return data;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
+export const getMoneyTransactions = async ({
+  Limit,
+  Offset,
+}: {
+  Limit: number;
+  Offset: number;
+}) => {
+  try {
+    const { data } = await authAxios.get<TransactionsResponse>(
+      `/money-transactions?Limit=${Limit}&Offset=${Offset}`,
+    );
+
+    return data;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
+export const payout = async ({ amount }: { amount: number }) => {
+  try {
+    const { data } = await authAxios.post('/user/billing/payout', {
+      amount,
+    });
+
+    console.log('payout', data);
+    return true;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
+export const topUp = async ({ amount }: { amount: number }) => {
+  try {
+    const { data } = await authAxios.post<TopUpResponse>('/user/top-up', {
+      amount,
+    });
+
+    return data.data;
+  } catch (err: any) {
+    throw err?.response?.data;
+  }
+};
+
+export const sendVerificationEmail = async () => {
+  try {
+    const { data } = await authAxios.post<ErrorCodeResponse>(
+      '/user/email-send-verification');
+
+    return data;
   } catch (err: any) {
     throw err?.response?.data;
   }

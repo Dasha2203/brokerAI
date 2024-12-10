@@ -34,7 +34,7 @@ const Sessions = ({ className }: Props) => {
 
   return (
     <Box className={clsx(className)}>
-      <div className="font-bold text-2xl">Last sessions</div>
+      <div className="font-bold text-2xl">{t('lastSessions')}</div>
 
       {sessions.length ? (
         <ul className="mt-8">
