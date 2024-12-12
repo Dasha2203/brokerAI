@@ -106,7 +106,8 @@
       "fee": "Fee",
       "value": "Amount",
       "explanationKey": "Type of operation",
-      "amount": "Amount"
+      "amount": "Amount",
+      "account": "Account"
     },
     "historyTransactions": "History of transactions",
     "active": "Active",
@@ -137,7 +138,8 @@
       "addOtp": "Add otp",
       "remove": "Remove",
       "reset": "Reset",
-      "verify": "Verify"
+      "verify": "Verify",
+      "logout": "Log out"
     }
   },
   "stockpacks": {

@@ -14,11 +14,13 @@ import { removeOtp } from '@/api/auth';
 import { ErrorEnum } from '@/types/error';
 import ConfirmOtpModal from '@/components/ConfirmOTPModal';
 import ResetOTPModal from '@/components/ResetOTPModal';
+import { useRouter } from 'next/navigation';
 
 const ActionsPanel = ({ user, billingInfo, className }: Props) => {
   const t = useTranslations('profile');
   const [isPayment, setIsPayment] = useState<'payout' | 'topup' | null>(null);
   const [amount, setAmount] = useState('');
+  const router = useRouter();
   const restoreModal = useModal();
   const pricingModal = useModal();
   const paymentModal = useModal();
@@ -174,8 +176,27 @@ const ActionsPanel = ({ user, billingInfo, className }: Props) => {
           </Button>
         ),
       },
+      {
+        label: t('label.account'),
+        value: (
+          <Button
+            as="button"
+            variant="contained"
+            uiColor="primary"
+            size="sm"
+            onClick={logout}
+          >
+            {t('action.logout')}
+          </Button>
+        ),
+      },
     ];
   }, [billingInfo, pricingModal, user]);
+
+  function logout() {
+    localStorage.clear();
+    router.push('/auth/register');
+  }
 
   async function handlePayment() {
     try {
