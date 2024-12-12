@@ -9,6 +9,7 @@ import { BillinInfo, getBillingInfo } from '@/api/user';
 import Sessions from './components/Sessions';
 import ActionsPanel from './components/ActionsPanel';
 import Limitations from './components/Limitations';
+import ChatBot from '@/components/ChatBot';
 
 const Profile = () => {
   const user = useAuth();
@@ -39,6 +40,7 @@ const Profile = () => {
         <Sessions />
         <ActionsPanel user={user} billingInfo={billingInfo} />
       </div>
+      <ChatBot />
     </PageContainer>
   );
 };
