@@ -115,12 +115,13 @@ const ChatBot = () => {
           <div className="pr-4">
             <div
               className={clsx(
-                'py-8 px-4 w-full rounded-[14px] shadow-[0_4px_4px_0_rgba(0,0,0,0.12)]',
+                'px-4 w-full rounded-[14px] shadow-[0_4px_4px_0_rgba(0,0,0,0.12)]',
                 // light
                 'bg-white',
                 'dark:bg-violet-800 transition-all',
                 {
-                  'opacity-0 invisible': !isShow,
+                  'opacity-0 invisible h-0 py-0': !isShow,
+                  'py-8': isShow
                 },
               )}
             >
