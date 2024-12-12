@@ -20,7 +20,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     return (
       <div className={clsx(className, 'font-Open-Sans')} style={style}>
-        <div className="relative">
+        <div className="relative h-full">
           {leftIcon && (
             <div
               style={{
@@ -38,7 +38,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             className={clsx(
               // dark
-              'dark:bg-transparent ',
+              'dark:bg-transparent h-full',
               // light
               'bg-[#F5F5F5]',
               leftIcon ? 'pl-[86px]' : 'pl-3 md:pl-6',

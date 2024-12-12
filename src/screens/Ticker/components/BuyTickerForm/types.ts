@@ -5,4 +5,6 @@ export type FormValues = {
 
 export type Props = {
   ticketId: string;
+  className?: string;
+  onSubmit: () => void;
 };

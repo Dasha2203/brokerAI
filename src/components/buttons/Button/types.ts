@@ -1,4 +1,4 @@
-export const buttonscolors = ['primary', 'danger'] as const;
+export const buttonscolors = ['primary', 'danger', 'green'] as const;
 export type ButtonColor = (typeof buttonscolors)[number];
 
 export const buttonsVariant = ['contained', 'outlined'] as const;

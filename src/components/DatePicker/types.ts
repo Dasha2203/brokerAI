@@ -2,6 +2,7 @@ export type CustomInputProps = {
   placeholder: string;
   onClick: React.MouseEventHandler<HTMLElement> | undefined;
   ref: React.Ref<HTMLDivElement>;
+  className?: string;
 };
 
 export type Props = {

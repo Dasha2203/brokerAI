@@ -1,8 +1,11 @@
 'use client';
+import ButtonIcon from '@/components/buttons/ButtonIcon';
 import LanguageBtn from '@/components/buttons/LanguageBtn';
 import ThemeButton from '@/components/buttons/ThemeButton';
+import useAuth from '@/hooks/useAuth';
 import useDeviceType from '@/hooks/useDeviceType';
 import DollarIcon from '@/icons/DollarIcon';
+import UserIcon from '@/icons/UserIcon';
 import clsx from 'clsx';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -27,6 +30,7 @@ const Header = () => {
   const t = useTranslations('navigation');
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const { isDeviceType } = useDeviceType({ width: 720 });
+  const user = useAuth();
 
   function handleOpenMenu() {
     setIsOpenMenu((prev) => !prev);
@@ -50,46 +54,54 @@ const Header = () => {
             MYMoney
           </Link>
         </div>
-        <nav
-          className={clsx(
-            // mobile
-            'fixed top-[76px] pt-12 inset-0 flex justify-center text-center transition-transform duration-300',
-            {
-              'translate-x-full': !isOpenMenu,
-            },
-            // desktop
-            'md:ml-auto md:mr-14 md:static md:translate-x-0 md:pt-0',
-            // light
-            'bg-white',
-            // dark
-            'dark:bg-violet-800',
-          )}
-        >
-          <ul
+        {user && (
+          <nav
             className={clsx(
-              'flex flex-col md:flex-row gap-4 font-bold md:gap-10',
+              // mobile
+              'fixed top-[76px] pt-12 inset-0 flex justify-center text-center transition-transform duration-300',
+              {
+                'translate-x-full': !isOpenMenu,
+              },
+              // desktop
+              'md:ml-auto md:mr-14 md:static md:translate-x-0 md:pt-0',
+              // light
+              'bg-white',
+              // dark
+              'dark:bg-violet-800',
             )}
           >
-            {navLinks.map((link, idx) => (
-              <li className="block" onClick={handleOpenMenu}>
-                <Link
-                  key={idx}
-                  href={link.link}
-                  className={clsx(
-                    'block text-xl py-4 transition-colors',
-                    'text-gray-300 hover:text-violet-600',
-                    'dark:text-white dark:hover:text-violet-100',
-                  )}
-                >
-                  {t(link.label)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+            <ul
+              className={clsx(
+                'flex flex-col md:flex-row gap-4 font-bold md:gap-10',
+              )}
+            >
+              {navLinks.map((link, idx) => (
+                <li className="block" onClick={handleOpenMenu}>
+                  <Link
+                    key={idx}
+                    href={link.link}
+                    className={clsx(
+                      'block text-xl py-4 transition-colors',
+                      'text-gray-300 hover:text-violet-600',
+                      'dark:text-white dark:hover:text-violet-100',
+                    )}
+                  >
+                    {t(link.label)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+
         {/* <div className="ml-auto flex"> */}
         <LanguageBtn className="ml-auto md:ml-0" />
         <ThemeButton />
+        {user && (
+          <Link href="/profile">
+            <ButtonIcon icon={UserIcon} />
+          </Link>
+        )}
         {isDeviceType ? (
           <button
             className={clsx('ml-6 burger', isOpenMenu && 'burger-active')}

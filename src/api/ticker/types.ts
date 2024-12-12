@@ -1,3 +1,5 @@
+import { ITicker } from "@/models/ITicker";
+
 export type TickerHistoryCredentials = {
   ticketId: string;
   StartAt?: string;
@@ -13,6 +15,7 @@ export type TickerHistoryResponse = {
   errorCode: string;
   data: {
     history: TickerHistoryItem[];
+    ticket: ITicker;
   };
 };
 
