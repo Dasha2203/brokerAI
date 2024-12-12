@@ -95,7 +95,10 @@ const Header = () => {
         )}
 
         {/* <div className="ml-auto flex"> */}
-        <LanguageBtn className="ml-auto md:ml-0" />
+        <LanguageBtn className={clsx(
+          'ml-auto',
+          user && 'md:ml-0'
+        )} />
         <ThemeButton />
         {user && (
           <Link href="/profile">
