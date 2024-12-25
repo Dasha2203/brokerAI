@@ -1,4 +1,4 @@
-import authAxios from '@/services/axiosInstance';
+import axios from '@/services/axiosInstance';
 import { AppDispatch } from '@/store';
 import {
   CreateStockPackCredentials,
@@ -23,7 +23,7 @@ export const fetchStockPacks =
   }) =>
   async (dispatch: AppDispatch) => {
     try {
-      const data = await authAxios.get<StockPackResponse>('/stock-pack', {
+      const data = await axios.get<StockPackResponse>('/stock-pack', {
         params: { limit, StockPackName, OnlyActive: true, Offset },
       });
       dispatch(userSlice.actions.fetchingSuccess(data.data));
@@ -37,7 +37,7 @@ export const fetchStockPack =
   ({ stockPackId }: { stockPackId: string }) =>
   async (dispatch: AppDispatch) => {
     try {
-      const data = await authAxios.get<StockPackResponse>(
+      const data = await axios.get<StockPackResponse>(
         `/stock-pack/${stockPackId}`,
       );
       dispatch(userSlice.actions.fetchingSuccess(data.data));
@@ -51,7 +51,7 @@ export const createStockPack =
   ({ color, stockPackName }: CreateStockPackCredentials) =>
   async (dispatch: AppDispatch) => {
     try {
-      const data = await authAxios.post<CreateStockPackResponse>(
+      const data = await axios.post<CreateStockPackResponse>(
         '/stock-pack',
         {
           color,
@@ -77,7 +77,7 @@ export const removeStockPack =
   ({ stockPackId }: RemoveStockPackCredentials) =>
   async (dispatch: AppDispatch) => {
     try {
-      const data = await authAxios.delete(`/stock-pack/${stockPackId}`);
+      const data = await axios.delete(`/stock-pack/${stockPackId}`);
 
       dispatch(userSlice.actions.deleteStockPack({ stockPackId }));
     } catch (err) {
@@ -89,7 +89,7 @@ export const updateStockPack =
   ({ color, stockPackName, stockPackId }: UpdateStockPackCredentials) =>
   async (dispatch: AppDispatch) => {
     try {
-      await authAxios.post<ErrorCodeResponse>(`/stock-pack/${stockPackId}`, {
+      await axios.post<ErrorCodeResponse>(`/stock-pack/${stockPackId}`, {
         color,
         stockPackName,
       });
@@ -109,7 +109,7 @@ export const updateStockPack =
 export const getAnalysisStockPack =
   (stockPackId?: string) => async (dispatch: AppDispatch) => {
     try {
-      const { data } = await authAxios.get<GetAnalysisStockPackResponse>(
+      const { data } = await axios.get<GetAnalysisStockPackResponse>(
         '/stock-pack/analysis',
         {
           params: {

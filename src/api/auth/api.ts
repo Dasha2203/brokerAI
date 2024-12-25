@@ -1,4 +1,4 @@
-import authAxios, { axiosClient } from '@/services/axiosInstance';
+import axios from '@/services/axiosInstance';
 import {
   AddOtpResponse,
   ChangePasswordCredentials,
@@ -14,7 +14,7 @@ import {
 
 export const register = async (data: RegistrationCredentials) => {
   try {
-    const response = await axiosClient.post<RegistrationResponse>(
+    const response = await axios.post<RegistrationResponse>(
       '/user/sign-up',
       data,
     );
@@ -27,7 +27,7 @@ export const register = async (data: RegistrationCredentials) => {
 
 export const login = async (data: LoginCredentials) => {
   try {
-    const response = await axiosClient.post<LoginResponse>('/user/login', data);
+    const response = await axios.post<LoginResponse>('/user/login', data);
     return response.data;
   } catch (err: any) {
     throw err?.response?.data;
@@ -36,7 +36,7 @@ export const login = async (data: LoginCredentials) => {
 
 export const resetPassword = async (data: ResetPasswordCredentials) => {
   try {
-    const response = await axiosClient.post<ErrorCodeResponse>(
+    const response = await axios.post<ErrorCodeResponse>(
       '/user/password/request-reset',
       data,
     );
@@ -49,7 +49,7 @@ export const resetPassword = async (data: ResetPasswordCredentials) => {
 
 export const changePassword = async (data: ChangePasswordCredentials) => {
   try {
-    const response = await axiosClient.post<ErrorCodeResponse>(
+    const response = await axios.post<ErrorCodeResponse>(
       '/user/password/reset',
       data,
     );
@@ -62,7 +62,7 @@ export const changePassword = async (data: ChangePasswordCredentials) => {
 
 export const getUserInfo = async () => {
   try {
-    const response = await authAxios.get<UserInfoResponse>('/user');
+    const response = await axios.get<UserInfoResponse>('/user');
 
     return response.data;
   } catch (err: any) {
@@ -72,7 +72,7 @@ export const getUserInfo = async () => {
 
 export const addOtp = async () => {
   try {
-    const response = await authAxios.post<AddOtpResponse>('/auth/add-otp');
+    const response = await axios.post<AddOtpResponse>('/auth/add-otp');
 
     return response.data;
   } catch (err: any) {
@@ -82,7 +82,7 @@ export const addOtp = async () => {
 
 export const confirmOtp = async ({ code }: { code: string }) => {
   try {
-    const data = await authAxios.post<ConfirmOtpResponse>('/auth/confirm-otp', {
+    const data = await axios.post<ConfirmOtpResponse>('/auth/confirm-otp', {
       code,
     });
 
@@ -94,7 +94,7 @@ export const confirmOtp = async ({ code }: { code: string }) => {
 
 export const resetOtp = async (data: { email: string; resetKey: string }) => {
   try {
-    const response = await authAxios.post<ConfirmOtpResponse>(
+    const response = await axios.post<ConfirmOtpResponse>(
       '/auth/reset-otp',
       data,
     );
@@ -108,7 +108,7 @@ export const resetOtp = async (data: { email: string; resetKey: string }) => {
 export const removeOtp = async () => {
   try {
     const { data } =
-      await authAxios.post<ErrorCodeResponse>('/auth/remove-otp');
+      await axios.post<ErrorCodeResponse>('/auth/remove-otp');
 
     return data;
   } catch (err: any) {

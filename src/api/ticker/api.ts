@@ -1,4 +1,4 @@
-import authAxios from '@/services/axiosInstance';
+import axios from '@/services/axiosInstance';
 import {
   BuyTickerCredentials,
   BuyTickerResponse,
@@ -14,7 +14,7 @@ export const tickerHistory = async ({
   EndAt,
 }: TickerHistoryCredentials) => {
   try {
-    const { data } = await authAxios.get<TickerHistoryResponse>(
+    const { data } = await axios.get<TickerHistoryResponse>(
       `/ticket/${ticketId}/history?`,
       {
         params: {
@@ -37,7 +37,7 @@ export const buyTicker = async ({
   count,
 }: BuyTickerCredentials) => {
   try {
-    const { data } = await authAxios.post<BuyTickerResponse>(
+    const { data } = await axios.post<BuyTickerResponse>(
       `/ticket/request/${ticketId}/${stockPackId}/buy?price=${price}`,
       {
         count,
@@ -57,7 +57,7 @@ export const sellTicker = async ({
   price,
 }: SellTickerCredentials) => {
   try {
-    const { data } = await authAxios.post<SellTickerResponse>(
+    const { data } = await axios.post<SellTickerResponse>(
       `/ticket/request/${boughtTicketInStockPackId}/sell?price=${price}`,
       {
         stockPackId,

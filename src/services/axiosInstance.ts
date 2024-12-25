@@ -1,20 +1,24 @@
 import { RefreshResponse } from '@/api/auth';
-import axios from 'axios';
+import { default as axiosApi }  from 'axios';
 
 const baseURL = 'http://213.148.11.27:5000/api/';
 
-export const axiosClient = axios.create({
+export const axios = axiosApi.create({
   baseURL,
 });
 
-const authAxios = axios.create({
-  baseURL,
-});
+const authRoutes = [
+  '/user/sign-up',
+  '/user/login',
+  '/user/password/request-reset',
+  '/user/password/reset',
+  '/auth/refresh'
+]
 
 async function refreshAccessToken() {
   const refreshToken = localStorage.getItem('refreshToken');
   try {
-    const { data } = await axiosClient.post<RefreshResponse>('/auth/refresh', {
+    const { data } = await axiosApi.post<RefreshResponse>('/auth/refresh', {
       refreshToken,
     });
 
@@ -47,28 +51,25 @@ async function refreshAccessToken() {
   // return null;
 }
 
-authAxios.interceptors.request.use(
+axios.interceptors.request.use(
   async (config) => {
+    const { url } = config
     const accessToken = localStorage.getItem('accessToken');
     const accessTokenExpiration = localStorage.getItem('accessTokenExpiration');
 
-    if (!accessTokenExpiration) return config;
+    if ((url && authRoutes.find(i => url.includes(i))) || !accessToken || !accessTokenExpiration) return config
 
-    const accessTokenExpirationDate = new Date(accessTokenExpiration);
-    const now = new Date();
+    const nowDate = new Date()
+    const accessTokenExpirationDate = new Date(accessTokenExpiration)
 
-    if (accessToken && now < accessTokenExpirationDate) {
-      console.log(`access token: ` + accessToken)
+    if (accessToken && nowDate < accessTokenExpirationDate) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     } else {
-      // Если accessToken истёк, обновляем его
       const newAccessToken = await refreshAccessToken();
       if (newAccessToken) {
         config.headers['Authorization'] = `Bearer ${newAccessToken}`;
       }
     }
-    console.log('interceptor request: ' + accessToken);
-    console.log('headers: ' + config.headers);
 
     return config;
   },
@@ -76,25 +77,24 @@ authAxios.interceptors.request.use(
 );
 
 // Перехватчик ответов: обрабатывает ошибку 401 и пытается обновить токен
-// authAxios.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     const originalRequest = error.config;
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
 
-//     // Проверяем, если ошибка 401 и это не повторный запрос на обновление токена
-//     if (error.response?.status === 401 && !originalRequest._retry) {
-//       originalRequest._retry = true;
+    // Проверяем, если ошибка 401 и это не повторный запрос на обновление токена
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const newAccessToken = await refreshAccessToken();
 
-//       // Пробуем обновить токен
-//       const newAccessToken = await refreshAccessToken();
-//       if (newAccessToken) {
-//         originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-//         return authAxios(originalRequest); // Повторяем запрос с новым токеном
-//       }
-//     }
+      if (newAccessToken) {
+        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+        return axios(originalRequest);
+      }
+    }
 
-//     return Promise.reject(error);
-//   },
-// );
+    return Promise.reject(error);
+  },
+);
 
-export default authAxios;
+export default axios;

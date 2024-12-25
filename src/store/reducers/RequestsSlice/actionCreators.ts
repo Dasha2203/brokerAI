@@ -1,4 +1,4 @@
-import authAxios from '@/services/axiosInstance';
+import axios from '@/services/axiosInstance';
 import { AppDispatch } from '@/store';
 import {
   RemoveRequestCredentials,
@@ -12,7 +12,7 @@ export const fetchRequests =
   ({ Limit, Offset, TickerName }: RequestsCredentials) =>
   async (dispatch: AppDispatch) => {
     try {
-      const { data } = await authAxios.get<RequestsResponse>(
+      const { data } = await axios.get<RequestsResponse>(
         `/ticket/request?TickerName=${TickerName}`,
         {
           params: {
@@ -32,7 +32,7 @@ export const removeRequest =
   ({ requestId }: RemoveRequestCredentials) =>
   async (dispatch: AppDispatch) => {
     try {
-      await authAxios.delete<RemoveRequestResponse>(
+      await axios.delete<RemoveRequestResponse>(
         `/ticket/request/${requestId}`,
       );
       dispatch(requestSlice.actions.remove({ requestId }));

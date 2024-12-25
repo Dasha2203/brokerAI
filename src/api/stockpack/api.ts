@@ -1,4 +1,4 @@
-import authAxios from '@/services/axiosInstance';
+import axios from '@/services/axiosInstance';
 import { GetSpecificStockPackResponse, GetStockPackCredentials } from './types';
 import { StockPackResponse } from '@/store/reducers/UserSlice/types';
 
@@ -8,7 +8,7 @@ export const getStockpack = async ({
   Offset,
 }: GetStockPackCredentials) => {
   try {
-    const { data } = await authAxios.get<GetSpecificStockPackResponse>(
+    const { data } = await axios.get<GetSpecificStockPackResponse>(
       `/stock-pack/${stockPackId}/tickets`,
       {
         params: {
@@ -30,7 +30,7 @@ export const getInfoStockpack = async ({
   stockPackId: string;
 }) => {
   try {
-    const { data } = await authAxios.get<StockPackResponse>('/stock-pack/', {
+    const { data } = await axios.get<StockPackResponse>('/stock-pack/', {
       params: {
         stockPackId,
         Limit: 10,

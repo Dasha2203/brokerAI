@@ -1,4 +1,4 @@
-import authAxios, { axiosClient } from '@/services/axiosInstance';
+import axios from '@/services/axiosInstance';
 import {
   BillingInfoResponse,
   ErrorCodeResponse,
@@ -11,7 +11,7 @@ import {
 
 export const getUserInfo = async () => {
   try {
-    const response = await authAxios.get<UserInfoResponse>('/user');
+    const response = await axios.get<UserInfoResponse>('/user');
 
     return response.data;
   } catch (err: any) {
@@ -22,7 +22,7 @@ export const getUserInfo = async () => {
 export const getBillingInfo = async () => {
   try {
     const response =
-      await authAxios.get<BillingInfoResponse>('/user/billing/info');
+      await axios.get<BillingInfoResponse>('/user/billing/info');
     console.log(response);
 
     return response.data;
@@ -33,7 +33,7 @@ export const getBillingInfo = async () => {
 
 export const getSessions = async () => {
   try {
-    const response = await authAxios.get<SessionsResponse>(
+    const response = await axios.get<SessionsResponse>(
       '/auth/session?Limit=5&Offset=0',
     );
 
@@ -45,7 +45,7 @@ export const getSessions = async () => {
 
 export const removeSession = async ({ sessionId }: { sessionId: string }) => {
   try {
-    await authAxios.delete<SessionsResponse>(
+    await axios.delete<SessionsResponse>(
       `/auth/session?sessionId=${sessionId}`,
     );
 
@@ -58,7 +58,7 @@ export const removeSession = async ({ sessionId }: { sessionId: string }) => {
 export const getLimitations = async () => {
   try {
     const { data } =
-      await authAxios.get<LimitationsResponse>('/user/limitations');
+      await axios.get<LimitationsResponse>('/user/limitations');
 
     return data;
   } catch (err: any) {
@@ -74,7 +74,7 @@ export const getMoneyTransactions = async ({
   Offset: number;
 }) => {
   try {
-    const { data } = await authAxios.get<TransactionsResponse>(
+    const { data } = await axios.get<TransactionsResponse>(
       `/money-transactions?Limit=${Limit}&Offset=${Offset}`,
     );
 
@@ -86,7 +86,7 @@ export const getMoneyTransactions = async ({
 
 export const payout = async ({ amount }: { amount: number }) => {
   try {
-    const { data } = await authAxios.post('/user/billing/payout', {
+    const { data } = await axios.post('/user/billing/payout', {
       amount,
     });
 
@@ -99,7 +99,7 @@ export const payout = async ({ amount }: { amount: number }) => {
 
 export const topUp = async ({ amount }: { amount: number }) => {
   try {
-    const { data } = await authAxios.post<TopUpResponse>('/user/top-up', {
+    const { data } = await axios.post<TopUpResponse>('/user/top-up', {
       amount,
     });
 
@@ -111,7 +111,7 @@ export const topUp = async ({ amount }: { amount: number }) => {
 
 export const sendVerificationEmail = async () => {
   try {
-    const { data } = await authAxios.post<ErrorCodeResponse>(
+    const { data } = await axios.post<ErrorCodeResponse>(
       '/user/email-send-verification');
 
     return data;
