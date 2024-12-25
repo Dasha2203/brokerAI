@@ -1,7 +1,7 @@
 import { RefreshResponse } from '@/api/auth';
 import { default as axiosApi }  from 'axios';
 
-const baseURL = 'http://213.148.11.27:5000/api/';
+const baseURL = process.env.NEXT_PUBLIC_SERVER_API;
 
 export const axios = axiosApi.create({
   baseURL,
@@ -18,7 +18,7 @@ const authRoutes = [
 async function refreshAccessToken() {
   const refreshToken = localStorage.getItem('refreshToken');
   try {
-    const { data } = await axiosApi.post<RefreshResponse>('/auth/refresh', {
+    const { data } = await axios.post<RefreshResponse>('/auth/refresh', {
       refreshToken,
     });
 
@@ -48,7 +48,6 @@ async function refreshAccessToken() {
     throw error;
   }
   return null;
-  // return null;
 }
 
 axios.interceptors.request.use(
