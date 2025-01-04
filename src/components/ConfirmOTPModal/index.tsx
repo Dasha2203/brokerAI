@@ -10,14 +10,16 @@ import { REGEX_NUMBER } from '@/const';
 import Lottie from 'lottie-react';
 import FormField from '../forms/FormField';
 import Input from '../forms/Input';
+import ResetOTPModal from '../ResetOTPModal';
+import useModal from '@/hooks/useModal';
 
-const ConfirmOtpModal = ({ codeKey, onSubmit, ...props }: Props) => {
+const ConfirmOtpModal = ({ user, codeKey, onSubmit, ...props }: Props) => {
   const t = useTranslations('otp');
   const tError = useTranslations('error');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [code, setCode] = useState(codeKey || '');
-  console.log(codeKey);
+  const resetOtpModal = useModal();
 
   async function handleConfirm() {
     try {
@@ -72,18 +74,40 @@ const ConfirmOtpModal = ({ codeKey, onSubmit, ...props }: Props) => {
               className="w-full text-center"
             />
           </FormField>
-          <Button
-            as="button"
-            uiColor="primary"
-            variant="contained"
-            className="w-full mt-auto md:mt-9"
-            onClick={handleConfirm}
-            isLoading={isLoading}
-            disabled={code.length < 6}
-          >
-            {t('action.confirm')}
-          </Button>
+          <div className="flex flex-col w-full gap-4">
+            <Button
+              as="button"
+              size="sm"
+              uiColor="primary"
+              variant="contained"
+              className="w-full mt-auto md:mt-9"
+              onClick={handleConfirm}
+              isLoading={isLoading}
+              disabled={code.length < 6}
+            >
+              {t('action.confirm')}
+            </Button>
+            <Button
+              as="button"
+              uiColor="primary"
+              variant="contained"
+              size="sm"
+              onClick={() => resetOtpModal.setIsOpen(true)}
+            >
+              {t('action.reset')}
+            </Button>
+            </div>
         </div>
+      )}
+
+      {resetOtpModal.isOpen && user && (
+        <ResetOTPModal
+          email={user.email}
+          onSubmit={async () => {
+            resetOtpModal.setIsOpen(false);
+          }}
+          {...resetOtpModal.modalProps}
+        />
       )}
     </Modal>
   );

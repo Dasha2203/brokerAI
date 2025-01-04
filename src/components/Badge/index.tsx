@@ -9,6 +9,7 @@ const Badge = ({ text, color, className, size = 'base' }: Props) => {
         {
           'bg-[#D8FFE0] text-green': color === 'green',
           'bg-[#ffd3d6] text-red': color === 'red',
+          'bg-yellow-soft text-yellow': color === 'yellow',
           'py-3 px-5 text-base': size === 'base',
           'py-1 px-2 text-xs': size === 'xs',
         },

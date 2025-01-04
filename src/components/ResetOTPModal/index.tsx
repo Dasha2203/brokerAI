@@ -66,6 +66,7 @@ const ResetOTPModal = ({ onSubmit, email, ...props }: Props) => {
             as="button"
             uiColor="primary"
             variant="contained"
+            size="sm"
             className="w-full mt-auto md:mt-9"
             onClick={handleConfirm}
             isLoading={isLoading}
