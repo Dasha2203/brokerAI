@@ -50,7 +50,7 @@ export type GetAnalysisStockPackResponse = {
     countStocks: number;
     riskFreeRate: number;
     sharpeRatio: number;
-    diversificationLevel: unknown;
+    diversificationLevel: string;
     sumByStock: [
       {
         key: string;

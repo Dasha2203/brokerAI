@@ -57,8 +57,8 @@ const UserInfo = ({ user, billingInfo, className }: Props) => {
         value: (
           <Badge
             size="xs"
-            color={user.otpConnected ? 'green' : 'red'}
-            text={user.otpConnected ? t('connected') : t('notConnected')}
+            color={billingInfo?.expressOnboardingCompleted ? 'green' : 'red'}
+            text={billingInfo?.expressOnboardingCompleted ? t('connected') : t('notConnected')}
             className="uppercase"
           />
         ),

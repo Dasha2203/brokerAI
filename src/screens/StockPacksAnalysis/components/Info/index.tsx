@@ -3,11 +3,13 @@ import clsx from 'clsx';
 import { useAppSelector } from '@/hooks/redux';
 import { InfoStockPackKeys, Props } from './types';
 import { getFormatValue } from './getFormatValue';
+import Badge from '@/components/Badge';
 
 const firstKeys: (keyof InfoStockPackKeys)[] = [
   'totalPrice',
   'boughtPrice',
   'revenue',
+  'diversificationLevel',
 ];
 
 const secondKeys: (keyof InfoStockPackKeys)[] = [
@@ -49,7 +51,17 @@ const Info = ({ className }: Props) => {
             >
               <span className="font-bold">{t(`label.${key}`)}</span>
               <span className="text-gray-300">
-                {getFormatValue(analysis.data, key)}
+                {key === 'diversificationLevel' ? (
+                  <Badge
+                    size="xs"
+                    color={
+                      analysis.data[key] === 'Bad' 
+                      ? 'red' 
+                      : analysis.data[key] === 'Moderate' 
+                        ? 'yellow' : 'green'}
+                    text={t(`diversificationLevel.${getFormatValue(analysis.data, key)}`)}
+                  />
+                ): getFormatValue(analysis.data, key)}
               </span>
             </li>
           ))}

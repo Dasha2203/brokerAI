@@ -65,66 +65,61 @@ const ActionsPanel = ({ user, billingInfo, className }: Props) => {
       {
         label: t('label.stripe'),
         value: (
-          <>
-            {billingInfo?.expressOnboardingCompleted ? (
-              <Button
-                as="link"
-                href={billingInfo?.expressPortalUrl || ''}
-                variant="contained"
-                uiColor="primary"
-                target="_blank"
-                size="sm"
-              >
-                {t('action.connectStripe')}
-              </Button>
-            ) : (
-              <div className="flex items-center gap-2">
-                <Button
-                  as="link"
-                  href={billingInfo?.customerPortalUrl || ''}
-                  variant="contained"
-                  uiColor="primary"
-                  target="_blank"
-                  size="sm"
-                >
-                  {t('action.manageStripe')}
-                </Button>
-                <Button
-                  as="button"
-                  variant="contained"
-                  uiColor="primary"
-                  size="sm"
-                  onClick={() => {
-                    paymentModal.setIsOpen(true);
-                    setIsPayment('topup');
-                  }}
-                >
-                  {t('action.topUp')}
-                </Button>
-                <Button
-                  as="button"
-                  variant="contained"
-                  uiColor="primary"
-                  size="sm"
-                  onClick={() => {
-                    paymentModal.setIsOpen(true);
-                    setIsPayment('payout');
-                  }}
-                >
-                  {t('action.payOut')}
-                </Button>
-                <Button
-                  as="button"
-                  variant="contained"
-                  uiColor="primary"
-                  size="sm"
-                  onClick={() => pricingModal.setIsOpen(true)}
-                >
-                  {t('action.manageSubscription')}
-                </Button>
-              </div>
-            )}
-          </>
+          <div className="flex items-center gap-2">
+            <Button
+              as="link"
+              href={billingInfo?.expressPortalUrl || ''}
+              variant="contained"
+              uiColor="primary"
+              target="_blank"
+              size="sm"
+            >
+              {t('action.connectStripe')}
+            </Button>
+            <Button
+              as="link"
+              href={billingInfo?.customerPortalUrl || ''}
+              variant="contained"
+              uiColor="primary"
+              target="_blank"
+              size="sm"
+            >
+              {t('action.manageStripe')}
+            </Button>
+            <Button
+              as="button"
+              variant="contained"
+              uiColor="primary"
+              size="sm"
+              onClick={() => {
+                paymentModal.setIsOpen(true);
+                setIsPayment('topup');
+              }}
+            >
+              {t('action.topUp')}
+            </Button>
+            <Button
+              as="button"
+              variant="contained"
+              uiColor="primary"
+              size="sm"
+              onClick={() => {
+                paymentModal.setIsOpen(true);
+                setIsPayment('payout');
+              }}
+            >
+              {t('action.payOut')}
+            </Button>
+            <Button
+              as="button"
+              variant="contained"
+              uiColor="primary"
+              size="sm"
+              onClick={() => pricingModal.setIsOpen(true)}
+            >
+              {t('action.manageSubscription')}
+            </Button>
+          </div>
         ),
       },
       {
@@ -265,6 +260,7 @@ const ActionsPanel = ({ user, billingInfo, className }: Props) => {
       {otpModal.isOpen && <QrModal {...otpModal.modalProps} />}
       {confirmOtpModal.isOpen && (
         <ConfirmOtpModal
+          user={user}
           onSubmit={async () => {
             confirmOtpModal.setIsOpen(false);
             removeOtp();

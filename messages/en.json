@@ -16,7 +16,8 @@
     "warning": "Make sure you keep the key",
     "enterCode": "Please enter code",
     "action": {
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "reset": "Reset"
     },
     "resetTitle": "Reset OTP",
     "confirmTitle": "Confirm OTP"
@@ -153,6 +154,11 @@
     "assetWeight": "Asset weights",
     "industryWeight": "Industry weights",
     "detailsStock": "Details stockpack",
+    "diversificationLevel": {
+      "Bad": "Bad",
+      "Moderate": "Moderate",
+      "Good": "Good"
+    },
     "input": {
       "name": {
         "label": "Porfolio name",
@@ -176,6 +182,7 @@
     "label": {
       "name": "Name",
       "ticker": "Ticker",
+      "diversificationLevel": "Diversification level",
       "sectorKey": "Sector",
       "industryKey": "Indastry",
       "revenue": "Revenue",

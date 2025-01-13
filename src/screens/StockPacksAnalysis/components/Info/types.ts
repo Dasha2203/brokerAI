@@ -11,4 +11,5 @@ export type InfoStockPackKeys = Pick<
   | 'revenuePercentage'
   | 'riskFreeRate'
   | 'sharpeRatio'
+  | 'diversificationLevel'
 >;
